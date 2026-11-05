@@ -1,33 +1,66 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 340" role="img" aria-labelledby="roseTitle roseDesc">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 500" role="img" aria-labelledby="roseTitle roseDesc">
   <title id="roseTitle">A rose</title>
-  <desc id="roseDesc">A single rose with a long stem and two leaves, set against a dark sky.</desc>
+  <desc id="roseDesc">A large rose growing from a tiny asteroid, with drifting petals and a distant blue world.</desc>
   <defs>
-    <radialGradient id="roseSpace" cx="50%" cy="32%" r="75%">
-      <stop offset="0%" stop-color="#24182c"/>
-      <stop offset="55%" stop-color="#120e1c"/>
-      <stop offset="100%" stop-color="#070b16"/>
+    <radialGradient id="space" cx="50%" cy="28%" r="80%">
+      <stop offset="0%" stop-color="#4a3a55"/>
+      <stop offset="42%" stop-color="#241c36"/>
+      <stop offset="100%" stop-color="#100c18"/>
+    </radialGradient>
+    <radialGradient id="planet" cx="35%" cy="35%" r="70%">
+      <stop offset="0%" stop-color="#d7f3ef"/>
+      <stop offset="45%" stop-color="#2f86b0"/>
+      <stop offset="100%" stop-color="#1a3c56"/>
+    </radialGradient>
+    <radialGradient id="rock" cx="35%" cy="30%" r="75%">
+      <stop offset="0%" stop-color="#c4a882"/>
+      <stop offset="100%" stop-color="#5a4032"/>
     </radialGradient>
   </defs>
-  <rect width="280" height="340" fill="url(#roseSpace)"/>
-  <g fill="#c5d4f2">
-    <circle cx="36" cy="40" r="1" opacity="0.7"/>
-    <circle cx="236" cy="56" r="0.8" opacity="0.5"/>
-    <circle cx="214" cy="300" r="1" opacity="0.4"/>
-    <circle cx="48" cy="250" r="0.7" opacity="0.45"/>
+  <rect width="340" height="500" rx="18" fill="url(#space)"/>
+  <ellipse cx="70" cy="90" rx="90" ry="46" fill="#f0c2cc" opacity="0.28"/>
+  <ellipse cx="250" cy="150" rx="110" ry="50" fill="#e7b4c4" opacity="0.2"/>
+  <ellipse cx="180" cy="40" rx="80" ry="28" fill="#f0d7a2" opacity="0.16"/>
+  <g fill="#fff6d8">
+    <circle cx="28" cy="36" r="1.1"/><circle cx="300" cy="48" r="1"/><circle cx="40" cy="300" r="0.8"/>
+    <circle cx="310" cy="360" r="0.9"/><circle cx="24" cy="430" r="0.7"/>
+    <path d="M300 24 l1 3.2 3.4.1-2.6 2.1.9 3.2-2.7-2-2.7 2 .9-3.2-2.6-2.1 3.4-.1z"/>
   </g>
-  <path d="M140 292 C138 246 150 214 136 176" fill="none" stroke="#8eb8b4" stroke-width="3" stroke-linecap="round"/>
-  <path d="M138 230 C108 214 92 196 86 176 C112 184 128 200 138 222" fill="#7eaea8"/>
-  <path d="M142 198 C176 186 198 168 206 148 C180 158 164 174 148 194" fill="#6f9e98"/>
-  <g transform="translate(140 132)">
-    <ellipse cx="0" cy="-34" rx="16" ry="24" fill="#e7b0c2"/>
-    <ellipse cx="0" cy="-34" rx="16" ry="24" fill="#e7b0c2" transform="rotate(60)"/>
-    <ellipse cx="0" cy="-34" rx="16" ry="24" fill="#e7b0c2" transform="rotate(120)"/>
-    <ellipse cx="0" cy="-34" rx="16" ry="24" fill="#c47d96" transform="rotate(30)"/>
-    <ellipse cx="0" cy="-34" rx="16" ry="24" fill="#c47d96" transform="rotate(90)"/>
-    <ellipse cx="0" cy="-34" rx="16" ry="24" fill="#c47d96" transform="rotate(150)"/>
-    <circle r="11" fill="#f6d5df"/>
+  <circle cx="262" cy="390" r="36" fill="url(#planet)"/>
+  <path d="M240 384c10-8 22-6 30 2 6 8 4 16-2 20" fill="#1d6a52" opacity="0.55"/>
+  <path d="M250 404c12 2 20 8 22 14" fill="none" stroke="#d7f3ef" stroke-width="2" opacity="0.35"/>
+  <g fill="#e7a0a8">
+    <ellipse cx="78" cy="210" rx="10" ry="6" transform="rotate(-30 78 210)"/>
+    <ellipse cx="246" cy="250" rx="12" ry="7" transform="rotate(24 246 250)"/>
+    <ellipse cx="60" cy="330" rx="8" ry="5" transform="rotate(18 60 330)"/>
+    <ellipse cx="210" cy="150" rx="7" ry="4" transform="rotate(-20 210 150)"/>
+    <ellipse cx="120" cy="120" rx="9" ry="5" transform="rotate(40 120 120)"/>
   </g>
-  <g transform="translate(214 48)" fill="none" stroke="#f4f7ff" stroke-width="1.1" stroke-linejoin="round">
-    <path d="M0-10 2.4-3.2 10-3.2 3.8 1.2 6 8.4 0 4.2-6 8.4-3.8 1.2-10-3.2-2.4-3.2Z"/>
+  <ellipse cx="168" cy="452" rx="54" ry="14" fill="#000" opacity="0.28"/>
+  <path d="M118 430c8-24 28-36 52-34 22 2 40 16 46 36 2 8-8 16-22 18-28 4-62 2-76-20z" fill="url(#rock)"/>
+  <path d="M164 412 C158 340 176 280 150 210" fill="none" stroke="#6b5344" stroke-width="7" stroke-linecap="round"/>
+  <path d="M156 250 C120 236 96 214 84 186 C118 198 140 220 156 246" fill="#3f6b52"/>
+  <path d="M158 300 C198 284 226 260 238 232 C206 246 184 268 162 294" fill="#2f5340"/>
+  <path d="M150 268 l8 10" stroke="#6b5344" stroke-width="2"/>
+  <path d="M156 318 l-8 8" stroke="#6b5344" stroke-width="2"/>
+  <g transform="translate(156 168)">
+    <g fill="#7a2434">
+      <path d="M0 10 C26-4 30-48 0-74 C-30-48 -26-4 0 10Z" transform="rotate(0)"/>
+      <path d="M0 10 C26-4 30-48 0-74 C-30-48 -26-4 0 10Z" transform="rotate(60)"/>
+      <path d="M0 10 C26-4 30-48 0-74 C-30-48 -26-4 0 10Z" transform="rotate(120)"/>
+    </g>
+    <g fill="#a33d4d">
+      <path d="M0 8 C20-2 24-38 0-58 C-24-38 -20-2 0 8Z" transform="rotate(30)"/>
+      <path d="M0 8 C20-2 24-38 0-58 C-24-38 -20-2 0 8Z" transform="rotate(90)"/>
+      <path d="M0 8 C20-2 24-38 0-58 C-24-38 -20-2 0 8Z" transform="rotate(150)"/>
+    </g>
+    <g fill="#d36a74">
+      <path d="M0 6 C14 0 16-26 0-40 C-16-26 -14 0 0 6Z" transform="rotate(10)"/>
+      <path d="M0 6 C14 0 16-26 0-40 C-16-26 -14 0 0 6Z" transform="rotate(70)"/>
+      <path d="M0 6 C14 0 16-26 0-40 C-16-26 -14 0 0 6Z" transform="rotate(130)"/>
+      <path d="M0 6 C14 0 16-26 0-40 C-16-26 -14 0 0 6Z" transform="rotate(190)"/>
+    </g>
+    <path d="M0 2 C8-6 6-16 0-18 C-6-16 -8-6 0 2 C4 8 8 10 0 14 C-8 10 -4 8 0 2Z" fill="#f3c4c6"/>
+    <circle r="5" fill="#f8e4dc"/>
   </g>
 </svg>

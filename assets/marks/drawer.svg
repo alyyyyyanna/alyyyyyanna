@@ -1,5 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" role="img" aria-hidden="true">
-  <path d="M7 8 H25 L23 13 H9 Z" fill="#2c3a56" stroke="#e8eefc" stroke-width="1.1" stroke-linejoin="round"/>
-  <path d="M8 20 H24 L26 26 H6 Z" fill="#3a4c6e" stroke="#e8eefc" stroke-width="1.1" stroke-linejoin="round"/>
-  <rect x="14" y="22" width="4" height="1.6" rx="0.6" fill="#d5e4ff"/>
+  <ellipse cx="16" cy="24" rx="8" ry="3" fill="#a78462"/>
+  <path d="M8 12 H24 L22 16 H10 Z" fill="#5c3828" stroke="#f3e6d4" stroke-width="0.8"/>
+  <path d="M9 22 H23 L24.5 26 H7.5 Z" fill="#c4895a" stroke="#f6e7d4" stroke-width="0.8"/>
+  <rect x="14.2" y="23" width="3.6" height="1.4" rx="0.4" fill="#fff1c2"/>
 </svg>
