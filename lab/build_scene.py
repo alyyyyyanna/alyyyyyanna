@@ -1,14 +1,109 @@
 """Build the portrait galaxy.
 
-Python draws one tall SVG. Motion lives in the SVG itself:
-drifting dust, a turning ring, an orbiting moon, a glowing lamp,
-and petals that fall.
+Python draws one tall SVG in a painted, storybook style. Motion lives in the
+SVG itself: drifting dust, a turning ring, an orbiting moon, a glowing lamp,
+swaying sprout, floating pages, and petals that fall. A still copy is built too.
+The edges fade to transparent so the picture melts into GitHub's dark page.
 """
 
 from pathlib import Path
 import random
 
 W, H = 760, 1520
+SERIF = "Palatino, Georgia, serif"
+
+
+def a(still: bool, xml: str) -> str:
+    """Return animation markup only when the scene is moving."""
+    return "" if still else xml
+
+
+# ---------------------------------------------------------------- defs
+DEFS = """
+  <defs>
+    <radialGradient id="space" cx="50%" cy="42%" r="85%">
+      <stop offset="0%" stop-color="#2a2142"/><stop offset="45%" stop-color="#151029"/><stop offset="100%" stop-color="#0d1117"/>
+    </radialGradient>
+    <radialGradient id="cloudPink" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#e7b4c4" stop-opacity="0.30"/><stop offset="100%" stop-color="#e7b4c4" stop-opacity="0"/></radialGradient>
+    <radialGradient id="cloudViolet" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#7d6bb8" stop-opacity="0.42"/><stop offset="100%" stop-color="#7d6bb8" stop-opacity="0"/></radialGradient>
+    <radialGradient id="cloudBlue" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#5b7fd0" stop-opacity="0.28"/><stop offset="100%" stop-color="#5b7fd0" stop-opacity="0"/></radialGradient>
+    <radialGradient id="glow" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#fff1c2" stop-opacity="0.55"/><stop offset="100%" stop-color="#fff1c2" stop-opacity="0"/></radialGradient>
+    <radialGradient id="lampglow" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#ffd978" stop-opacity="0.85"/><stop offset="45%" stop-color="#ffb94a" stop-opacity="0.28"/><stop offset="100%" stop-color="#ffb94a" stop-opacity="0"/></radialGradient>
+    <radialGradient id="rock" cx="32%" cy="26%" r="80%"><stop offset="0%" stop-color="#e6cfa8"/><stop offset="45%" stop-color="#a47f5d"/><stop offset="100%" stop-color="#4a3226"/></radialGradient>
+    <linearGradient id="shade" x1="0.15" y1="0.05" x2="0.9" y2="1"><stop offset="0.35" stop-color="#140c1c" stop-opacity="0"/><stop offset="1" stop-color="#140c1c" stop-opacity="0.6"/></linearGradient>
+    <radialGradient id="sea" cx="34%" cy="30%" r="78%"><stop offset="0%" stop-color="#bfe9ff"/><stop offset="40%" stop-color="#2f7fb0"/><stop offset="100%" stop-color="#102a4a"/></radialGradient>
+    <radialGradient id="atmo" cx="50%" cy="50%" r="50%"><stop offset="80%" stop-color="#7cc4ff" stop-opacity="0"/><stop offset="93%" stop-color="#7cc4ff" stop-opacity="0.35"/><stop offset="100%" stop-color="#7cc4ff" stop-opacity="0"/></radialGradient>
+    <linearGradient id="mtn" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#9a8a8a"/><stop offset="1" stop-color="#4d4048"/></linearGradient>
+    <linearGradient id="wood" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#c4895a"/><stop offset="1" stop-color="#7a4a30"/></linearGradient>
+    <linearGradient id="glass" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#e6f3ff" stop-opacity="0.18"/><stop offset="1" stop-color="#e6f3ff" stop-opacity="0.03"/></linearGradient>
+
+    <!-- edge fades: white = visible, black = transparent -->
+    <linearGradient id="gx" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#000"/><stop offset="0.02" stop-color="#2a2a2a"/><stop offset="0.045" stop-color="#8c8c8c"/><stop offset="0.08" stop-color="#fff"/>
+      <stop offset="0.92" stop-color="#fff"/><stop offset="0.955" stop-color="#8c8c8c"/><stop offset="0.98" stop-color="#2a2a2a"/><stop offset="1" stop-color="#000"/>
+    </linearGradient>
+    <linearGradient id="gy" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#000"/><stop offset="0.012" stop-color="#2a2a2a"/><stop offset="0.028" stop-color="#8c8c8c"/><stop offset="0.05" stop-color="#fff"/>
+      <stop offset="0.95" stop-color="#fff"/><stop offset="0.972" stop-color="#8c8c8c"/><stop offset="0.988" stop-color="#2a2a2a"/><stop offset="1" stop-color="#000"/>
+    </linearGradient>
+    <mask id="mx" maskUnits="userSpaceOnUse" x="0" y="0" width="760" height="1520"><rect width="760" height="1520" fill="url(#gx)"/></mask>
+    <mask id="my" maskUnits="userSpaceOnUse" x="0" y="0" width="760" height="1520"><rect width="760" height="1520" fill="url(#gy)"/></mask>
+
+    <filter id="haze" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="26"/></filter>
+    <filter id="rough" x="-15%" y="-15%" width="130%" height="130%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.05" numOctaves="3" seed="4" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="4" xChannelSelector="R" yChannelSelector="G" result="d"/>
+      <feTurbulence type="fractalNoise" baseFrequency="0.75" numOctaves="2" seed="9" result="g"/>
+      <feColorMatrix in="g" type="matrix" values="0 0 0 0 .1  0 0 0 0 .06  0 0 0 0 .06  1.3 0 0 0 -.5" result="ga"/>
+      <feComposite in="ga" in2="d" operator="in" result="gg"/>
+      <feMerge><feMergeNode in="d"/><feMergeNode in="gg"/></feMerge>
+    </filter>
+
+    <path id="blob" transform="translate(-10 -7)" d="M-34 8c2-28 22-46 48-42 20 3 36 16 40 36 4 22-8 40-28 46-24 8-52 2-60-18-6-14-4-16 0-22z"/>
+    <g id="body" filter="url(#rough)">
+      <use href="#blob" fill="url(#rock)" stroke="#2b1d22" stroke-width="1.3" stroke-linejoin="round"/>
+      <ellipse cx="-14" cy="-8" rx="9" ry="5.5" fill="#5b4333" opacity="0.5"/>
+      <path d="M-22 -5a9 5.5 0 0 0 17 3" fill="none" stroke="#f0dcb8" stroke-width="1.1" opacity="0.5"/>
+      <ellipse cx="16" cy="18" rx="11" ry="6.5" fill="#4a3426" opacity="0.45"/>
+      <path d="M6 21a11 6.5 0 0 0 20-2" fill="none" stroke="#f0dcb8" stroke-width="1.1" opacity="0.4"/>
+      <ellipse cx="-22" cy="22" rx="5" ry="3" fill="#5b4333" opacity="0.45"/>
+      <ellipse cx="22" cy="-18" rx="4" ry="2.6" fill="#5b4333" opacity="0.4"/>
+      <use href="#blob" fill="url(#shade)"/>
+    </g>
+  </defs>
+"""
+
+
+def body(transform: str) -> str:
+    return f'<use href="#body" transform="{transform}"/>'
+
+
+# ---------------------------------------------------------------- sky
+def clouds(still: bool) -> str:
+    return f"""
+    <g filter="url(#haze)">
+      <ellipse cx="380" cy="760" rx="420" ry="90" fill="url(#cloudViolet)" transform="rotate(54 380 760)"/>
+      <ellipse cx="180" cy="240" rx="180" ry="70" fill="url(#cloudViolet)">{a(still, '<animate attributeName="cx" values="180;230;180" dur="18s" repeatCount="indefinite"/>')}</ellipse>
+      <ellipse cx="540" cy="760" rx="200" ry="80" fill="url(#cloudPink)">{a(still, '<animate attributeName="cx" values="540;490;540" dur="22s" repeatCount="indefinite"/>')}</ellipse>
+      <ellipse cx="300" cy="1180" rx="160" ry="56" fill="url(#cloudBlue)">{a(still, '<animate attributeName="cy" values="1180;1140;1180" dur="16s" repeatCount="indefinite"/>')}</ellipse>
+      <ellipse cx="600" cy="520" rx="140" ry="50" fill="url(#cloudBlue)"/>
+    </g>"""
+
+
+def band() -> str:
+    """Fine, still stardust along a diagonal Milky Way."""
+    rng = random.Random(5)
+    cols = ("#fff6d8", "#cdbcf5", "#f4c9d6", "#b9c7ff")
+    bits = []
+    for _ in range(240):
+        t = rng.random()
+        x = 720 - 680 * t + rng.gauss(0, 60)
+        y = 300 + 1000 * t + rng.gauss(0, 45)
+        bits.append(
+            f'<circle cx="{x:.0f}" cy="{y:.0f}" r="{rng.uniform(0.5, 1.2):.1f}" '
+            f'fill="{rng.choice(cols)}" opacity="{rng.uniform(0.25, 0.75):.2f}"/>'
+        )
+    return "\n".join(bits)
 
 
 def dust(still: bool) -> str:
@@ -17,194 +112,41 @@ def dust(still: bool) -> str:
     for _ in range(110):
         x = rng.uniform(6, W - 6)
         y = rng.uniform(6, H - 6)
-        r = rng.choice((1.1, 1.5, 1.9, 2.4, 3.0))
+        r = rng.choice((1.1, 1.5, 1.9, 2.4, 3.0)) * 0.7
         opacity = rng.uniform(0.35, 1)
         if still:
-            bits.append(
-                f'<circle cx="{x:.1f}" cy="{y:.1f}" r="{r}" fill="#fff6d8" opacity="{opacity:.2f}"/>'
-            )
+            bits.append(f'<circle cx="{x:.1f}" cy="{y:.1f}" r="{r:.2f}" fill="#fff6d8" opacity="{opacity:.2f}"/>')
             continue
         dx = rng.uniform(-70, 90)
         dy = rng.uniform(-50, 80)
         drift = rng.uniform(6, 14)
         twinkle = rng.uniform(2.4, 5.5)
+        lo = max(opacity * 0.15, 0.05)
         bits.append(
-            f'<circle cx="{x:.1f}" cy="{y:.1f}" r="{r}" fill="#fff6d8" opacity="{opacity:.2f}">'
+            f'<circle cx="{x:.1f}" cy="{y:.1f}" r="{r:.2f}" fill="#fff6d8" opacity="{opacity:.2f}">'
             f'<animate attributeName="cx" values="{x:.1f};{x + dx:.1f};{x:.1f}" dur="{drift:.1f}s" repeatCount="indefinite"/>'
             f'<animate attributeName="cy" values="{y:.1f};{y + dy:.1f};{y:.1f}" dur="{drift * 1.15:.1f}s" repeatCount="indefinite"/>'
-            f'<animate attributeName="opacity" values="{max(opacity * 0.15, 0.05):.2f};{opacity:.2f};{max(opacity * 0.15, 0.05):.2f}" dur="{twinkle:.1f}s" repeatCount="indefinite"/>'
-            f"</circle>"
+            f'<animate attributeName="opacity" values="{lo:.2f};{opacity:.2f};{lo:.2f}" dur="{twinkle:.1f}s" repeatCount="indefinite"/>'
+            "</circle>"
         )
     return "\n".join(bits)
 
 
 def spark(x, y, scale=1, still=True):
-    star = 'd="M0-8 1.6-2.3 8-2 2.6 1.4 4.4 7.4 0 3.6-4.4 7.4-2.6 1.4-8-2-1.6-2.3Z"'
+    star = 'd="M0-10C1.5-3 3-1.5 10 0 3 1.5 1.5 3 0 10-1.5 3-3 1.5-10 0-3-1.5-1.5-3 0-10Z"'
     if still:
-        inner = f'<path transform="scale({scale})" fill="#fff1c2" {star}/>'
+        inner = f'<path transform="scale({scale})" fill="#fff6d8" {star}/>'
     else:
         inner = (
             "<g>"
             f'<animateTransform attributeName="transform" type="scale" values="{scale};{scale * 1.35};{scale}" dur="3.2s" repeatCount="indefinite"/>'
-            f'<path fill="#fff1c2" {star}/>'
+            f'<path fill="#fff6d8" {star}/>'
             "</g>"
         )
-    return f'<g transform="translate({x} {y})">{inner}</g>'
+    return f'<g transform="translate({x} {y})"><circle r="18" fill="url(#glow)"/>{inner}</g>'
 
 
-def rock(scale=1):
-    return (
-        f'<path transform="scale({scale})" fill="url(#rock)" '
-        f'd="M-34 8c2-28 22-46 48-42 20 3 36 16 40 36 4 22-8 40-28 46-24 8-52 2-60-18-6-14-4-16 0-22z"/>'
-    )
-
-
-def peak():
-    return """
-    <g transform="translate(230 500)">
-      <ellipse cx="0" cy="10" rx="120" ry="42" fill="#7d6bb8" opacity="0.2"/>
-      <ellipse cx="6" cy="86" rx="78" ry="14" fill="#000" opacity="0.28"/>
-      <path d="M-78 16c4-58 40-96 96-90 40 4 74 24 86 64 12 44-8 86-52 100-50 16-108 6-128-30-14-26-12-32-2-44z" fill="url(#rock)"/>
-      <path d="M-50 28 L10-118 L38-22 L70-58 L100 34 Z" fill="url(#snow)"/>
-      <path d="M10-118 L34-24 L-2-40 Z" fill="#b7c7d8"/>
-      <ellipse cx="-28" cy="-6" rx="14" ry="9" fill="#6d4e3a" opacity="0.35"/>
-      <ellipse cx="40" cy="28" rx="18" ry="11" fill="#5a4032" opacity="0.28"/>
-      <text x="0" y="128" fill="#f3e6d4" font-family="Palatino, Georgia, serif" font-size="16" text-anchor="middle">Peak Hunter</text>
-    </g>
-    """
-
-
-def route(still: bool):
-    spin = "" if still else '<animateTransform attributeName="transform" type="rotate" from="0" to="360" dur="16s" repeatCount="indefinite"/>'
-    return f"""
-    <g transform="translate(250 860)">
-      <ellipse cx="4" cy="92" rx="74" ry="12" fill="#000" opacity="0.25"/>
-      <g>{spin}<ellipse rx="108" ry="36" fill="none" stroke="#f0d7a2" stroke-width="1.6"/></g>
-      <g fill="#fff1c2">
-        <circle cx="-96" cy="-6" r="3.4"/>
-        <circle cx="-40" cy="-30" r="2.6"/>
-        <circle cx="48" cy="-28" r="2.8"/>
-        <circle cx="100" cy="8" r="3.2"/>
-      </g>
-      <circle r="64" fill="url(#sea)"/>
-      <path d="M-28-8c12-10 30-8 40 2 6 8-2 16-16 16-16 0-30-6-24-18z" fill="#1f6d58" opacity="0.55"/>
-      <path d="M6 16c10-4 22-2 28 6-8 6-20 8-28 2z" fill="#d7f3ef" opacity="0.35"/>
-      <text x="0" y="118" fill="#f3e6d4" font-family="Palatino, Georgia, serif" font-size="16" text-anchor="middle">Jeepney Router</text>
-    </g>
-    """
-
-
-def rose(still: bool):
-    fall = ""
-    if not still:
-        fall = """
-        <ellipse cx="-54" cy="-20" rx="6" ry="3.5" fill="#e7a0a8">
-          <animate attributeName="cy" values="-20;40;-20" dur="9s" repeatCount="indefinite"/>
-          <animate attributeName="opacity" values="1;0.2;1" dur="9s" repeatCount="indefinite"/>
-        </ellipse>
-        <ellipse cx="36" cy="-70" rx="7" ry="4" fill="#e7a0a8">
-          <animate attributeName="cy" values="-70;10;-70" dur="11s" repeatCount="indefinite"/>
-          <animate attributeName="opacity" values="0.3;1;0.3" dur="11s" repeatCount="indefinite"/>
-        </ellipse>
-        """
-    else:
-        fall = """
-        <ellipse cx="-54" cy="-20" rx="6" ry="3.5" fill="#e7a0a8"/>
-        <ellipse cx="36" cy="-70" rx="7" ry="4" fill="#e7a0a8"/>
-        """
-    return f"""
-    <g transform="translate(230 1260)">
-      <ellipse cx="0" cy="70" rx="42" ry="11" fill="#000" opacity="0.25"/>
-      <path d="M-32 56c4-18 16-28 32-26 14 2 26 12 30 28 1 6-6 11-14 12-18 3-40 1-48-14z" fill="url(#rock)"/>
-      <path d="M-2 42 C-6-6 6-62-10-108" fill="none" stroke="#6b5344" stroke-width="4.5" stroke-linecap="round"/>
-      <path d="M-6-16 C-32-28 -46-44 -54-62 C-30-52 -16-36 -6-18" fill="#3f6b52"/>
-      <g transform="translate(-8 -118)">
-        <path d="M0 7 C16-2 20-32 0-50 C-20-32 -16-2 0 7Z" fill="#7a2434"/>
-        <path d="M0 7 C16-2 20-32 0-50 C-20-32 -16-2 0 7Z" fill="#7a2434" transform="rotate(60)"/>
-        <path d="M0 7 C16-2 20-32 0-50 C-20-32 -16-2 0 7Z" fill="#7a2434" transform="rotate(120)"/>
-        <path d="M0 5 C12 0 14-22 0-36 C-14-22 -12 0 0 5Z" fill="#d36a74" transform="rotate(30)"/>
-        <path d="M0 5 C12 0 14-22 0-36 C-14-22 -12 0 0 5Z" fill="#d36a74" transform="rotate(90)"/>
-        <path d="M0 5 C12 0 14-22 0-36 C-14-22 -12 0 0 5Z" fill="#d36a74" transform="rotate(150)"/>
-        <circle r="5" fill="#f8e4dc"/>
-      </g>
-      {fall}
-    </g>
-    """
-
-
-def drawer():
-    return """
-    <g transform="translate(540 1390)">
-      <ellipse cx="0" cy="52" rx="36" ry="9" fill="#000" opacity="0.25"/>
-      <path d="M-30 32c3-20 18-30 32-28 14 2 26 12 28 26 1 7-7 14-16 14-16 2-38 0-44-12z" fill="url(#rock)"/>
-      <path d="M-20-6 h40 l-4 9 h-32 z" fill="#5c3828"/>
-      <path d="M-16 3 h32 v7 h-32 z" fill="#3a241c"/>
-      <path d="M-24 10 h48 l5 14 h-58 z" fill="url(#wood)"/>
-      <rect x="-7" y="15" width="14" height="3.5" rx="1.4" fill="#fff1c2"/>
-      <path d="M-8-1 h16 l3 4 h-18 z" fill="#fffaf2"/>
-    </g>
-    """
-
-
-def ring_world(still: bool):
-    spin = "" if still else '<animateTransform attributeName="transform" type="rotate" from="-20" to="340" dur="18s" repeatCount="indefinite"/>'
-    return f"""
-    <g transform="translate(170 170)">
-      <g>{spin}<ellipse rx="74" ry="22" fill="none" stroke="#f0d7a2" stroke-width="1.5"/></g>
-      {rock(1.05)}
-      <ellipse cx="-8" cy="-10" rx="9" ry="6" fill="#6d4e3a" opacity="0.35"/>
-    </g>
-    """
-
-
-def moon(still: bool):
-    spin = "" if still else '<animateTransform attributeName="transform" type="rotate" from="0" to="360" dur="12s" repeatCount="indefinite"/>'
-    return f"""
-    <g transform="translate(170 170)">
-      <g>{spin}<circle cx="86" cy="0" r="5" fill="#fff6d8"/></g>
-    </g>
-    """
-
-
-def lantern(still: bool):
-    glow = "" if still else '<animate attributeName="opacity" values="0.35;1;0.35" dur="2.2s" repeatCount="indefinite"/>'
-    return f"""
-    <g transform="translate(560 300)">
-      {rock(0.92)}
-      <path d="M0-4 v-46" stroke="#6b5344" stroke-width="3.4" stroke-linecap="round"/>
-      <path d="M-10-58 h20 l-3 16 h-14 z" fill="#f0d7a2"/>
-      <rect x="-7" y="-56" width="14" height="12" fill="#fff6d8" opacity="0.95">{glow}</rect>
-    </g>
-    """
-
-
-def books():
-    return """
-    <g transform="translate(560 660)">
-      """ + rock(1) + """
-      <g transform="translate(-22 -36)">
-        <rect x="0" y="0" width="18" height="24" rx="1" fill="#8e3d4a"/>
-        <rect x="16" y="-6" width="16" height="30" rx="1" fill="#3f6b52"/>
-        <rect x="30" y="2" width="15" height="22" rx="1" fill="#c4895a"/>
-        <path d="M2 28 h40 l6 12 h-50 z" fill="#efe2c4"/>
-        <path d="M12 33 h22 M12 37 h16" stroke="#b7a07a" stroke-width="1.2"/>
-      </g>
-    </g>
-    """
-
-
-def sprout():
-    return """
-    <g transform="translate(560 980)">
-      """ + rock(0.85) + """
-      <path d="M2-8 v-28" stroke="#3f6b52" stroke-width="2.4" stroke-linecap="round"/>
-      <path d="M2-28 C-10-40 -18-36 -16-26 C-8-28 -2-30 2-24" fill="#6fae78"/>
-      <path d="M2-22 C14-34 22-30 20-20 C12-22 6-24 2-18" fill="#3f6b52"/>
-    </g>
-    """
-
-
-def stars(still: bool):
+def stars(still: bool) -> str:
     labels = [
         (78, 90, "[tool]", 1.05),
         (400, 70, "[certificate]", 0.95),
@@ -219,85 +161,218 @@ def stars(still: bool):
     for index, (x, y, label, scale) in enumerate(labels):
         bits.append(spark(x, y - 14, scale, still or index % 2 == 0))
         bits.append(
-            f'<text x="{x}" y="{y + 16}" fill="#f3e6d4" font-family="Palatino, Georgia, serif" font-size="14" text-anchor="middle">{label}</text>'
+            f'<text x="{x}" y="{y + 18}" fill="#f3e6d4" font-family="{SERIF}" font-size="14" text-anchor="middle">{label}</text>'
         )
     return "\n".join(bits)
 
 
-def clouds(still: bool) -> str:
-    if still:
-        return """
-        <ellipse cx="180" cy="240" rx="180" ry="70" fill="url(#cloudViolet)"/>
-        <ellipse cx="540" cy="760" rx="200" ry="80" fill="url(#cloudPink)"/>
-        <ellipse cx="300" cy="1180" rx="160" ry="56" fill="url(#cloudGold)"/>
-        """
-    return """
-    <ellipse cx="180" cy="240" rx="180" ry="70" fill="url(#cloudViolet)">
-      <animate attributeName="cx" values="180;230;180" dur="18s" repeatCount="indefinite"/>
-    </ellipse>
-    <ellipse cx="540" cy="760" rx="200" ry="80" fill="url(#cloudPink)">
-      <animate attributeName="cx" values="540;490;540" dur="22s" repeatCount="indefinite"/>
-    </ellipse>
-    <ellipse cx="300" cy="1180" rx="160" ry="56" fill="url(#cloudGold)">
-      <animate attributeName="cy" values="1180;1140;1180" dur="16s" repeatCount="indefinite"/>
-    </ellipse>
-    """
+def rocks() -> str:
+    return "\n".join(
+        [
+            # big cropped rocks at the edges
+            body("translate(-30 600) rotate(8) scale(1.5 2.3)"),
+            body("translate(705 1505) rotate(-8) scale(3 2.2)"),
+            # small drifting ones
+            body("translate(352 346) scale(.22)"),
+            body("translate(436 640) rotate(40) scale(.16)"),
+            body("translate(140 1130) scale(.2)"),
+            body("translate(410 1040) rotate(-30) scale(.14)"),
+            body("translate(700 1190) rotate(20) scale(.24)"),
+        ]
+    )
 
 
+# ---------------------------------------------------------------- worlds
+def ring_world(still: bool) -> str:
+    spin = a(still, '<animateTransform attributeName="transform" type="rotate" from="-20" to="340" dur="18s" repeatCount="indefinite"/>')
+    return f"""
+    <g transform="translate(170 170)">
+      <g>{spin}<ellipse rx="78" ry="21" fill="none" stroke="#f0d7a2" stroke-width="1.6" opacity="0.9"/></g>
+      {body("scale(1.05)")}
+      <g transform="translate(-4 -40) rotate(-6)">
+        <ellipse cx="0" cy="2" rx="17" ry="4" fill="#7d3b52"/>
+        <rect x="-10" y="-17" width="20" height="19" rx="2" fill="#7d3b52"/>
+        <rect x="-10" y="-6" width="20" height="4" fill="#e7b4c4"/>
+      </g>
+    </g>"""
+
+
+def moon(still: bool) -> str:
+    spin = a(still, '<animateTransform attributeName="transform" type="rotate" from="0" to="360" dur="12s" repeatCount="indefinite"/>')
+    return f"""
+    <g transform="translate(170 170)">
+      <g>{spin}<circle cx="86" cy="0" r="5" fill="#fff6d8"/></g>
+    </g>"""
+
+
+def lantern(still: bool) -> str:
+    glow = a(still, '<animate attributeName="opacity" values="0.35;1;0.35" dur="2.2s" repeatCount="indefinite"/>')
+    return f"""
+    <g transform="translate(560 300)">
+      <circle cy="-54" r="46" fill="url(#lampglow)">{glow}</circle>
+      {body("scale(.55)")}
+      <path d="M0 -20V-60" stroke="#3b2c30" stroke-width="3.2" stroke-linecap="round"/>
+      <path d="M-9 -64H9L6 -76H-6Z" fill="#2f2428"/>
+      <path d="M-7 -64H7L5 -50H-5Z" fill="#ffe29a" stroke="#2f2428" stroke-width="1.2">{glow}</path>
+      <path d="M-5 -50H5L7 -46H-7Z" fill="#2f2428"/>
+    </g>"""
+
+
+def peak() -> str:
+    return f"""
+    <g transform="translate(230 500)">
+      <ellipse cx="0" cy="10" rx="130" ry="46" fill="#7d6bb8" opacity="0.18"/>
+      <path d="M-52 -20L-24 -108L-8 -94L26 -152L52 -98L66 -108L76 -20Z" fill="url(#mtn)" stroke="#2b1d22" stroke-width="1.4" stroke-linejoin="round"/>
+      <path d="M26 -152L52 -98L66 -108L76 -20L40 -20Z" fill="#140c1c" opacity="0.25"/>
+      <path d="M26 -152L44 -112L35 -116L27 -104L18 -117L8 -110Z" fill="#fffaf2" stroke="#2b1d22" stroke-width="1" stroke-linejoin="round"/>
+      <path d="M-24 -108L-12 -90L-17 -94L-23 -88L-31 -97Z" fill="#fffaf2" stroke="#2b1d22" stroke-width="1" stroke-linejoin="round"/>
+      <path d="M26 -152V-174" stroke="#3b2c30" stroke-width="2" stroke-linecap="round"/>
+      <path d="M26 -174L42 -169L26 -164Z" fill="#c8453f"/>
+      {body("scale(2 1.95)")}
+      <g fill="#3f6b52" stroke="#1f3a2c" stroke-width="1">
+        <path d="M-58 -52L-50 -76L-42 -52Z"/><path d="M-46 -54L-39 -72L-32 -54Z"/><path d="M52 -66L59 -86L66 -66Z"/>
+      </g>
+      <text x="0" y="120" fill="#f3e6d4" font-family="{SERIF}" font-size="16" text-anchor="middle">Peak Hunter</text>
+    </g>"""
+
+
+def books() -> str:
+    return f"""
+    <g transform="translate(560 660)">
+      {body("scale(1.3)")}
+      <g stroke="#2b1d22" stroke-width="1">
+        <rect x="-44" y="-30" width="42" height="9" rx="1" fill="#8e3d4a"/>
+        <rect x="-40" y="-39" width="36" height="9" rx="1" fill="#3f6b52"/>
+        <rect x="-42" y="-48" width="38" height="9" rx="1" fill="#c4895a"/>
+        <rect x="-38" y="-56" width="32" height="8" rx="1" fill="#4a5f8e"/>
+      </g>
+      <path d="M-6 -26H-2M-6 -35H-4M-6 -44H-4" stroke="#efe2c4" stroke-width="1.4" opacity="0.8"/>
+      <g transform="translate(24 -42)">
+        <path d="M-12 22H12" stroke="#5c3828" stroke-width="3" stroke-linecap="round"/>
+        <path d="M-14 4A15 15 0 0 0 14 4" fill="none" stroke="#5c3828" stroke-width="1.6"/>
+        <circle r="13" fill="url(#sea)" stroke="#2b1d22" stroke-width="1"/>
+        <path d="M-8-3c4-4 8-3 10 0s-3 5-6 4-6-1-4-4z" fill="#3f8f6a" opacity="0.85"/>
+        <path d="M-13 0H13" stroke="#e7fbff" stroke-width="0.6" opacity="0.5"/>
+      </g>
+      <path d="M-4 -6L36 -10L46 6L2 12Z" fill="#efe2c4" stroke="#2b1d22" stroke-width="1" stroke-linejoin="round"/>
+      <path d="M14 -8L18 8M28 -9L30 4" stroke="#b7a07a" stroke-width="1"/>
+      <path d="M32 -2L38 4M38 -2L32 4" stroke="#c8453f" stroke-width="1.6" stroke-linecap="round"/>
+    </g>"""
+
+
+def route(still: bool) -> str:
+    spin = a(still, '<animateTransform attributeName="transform" type="rotate" from="0" to="360" dur="16s" repeatCount="indefinite"/>')
+    return f"""
+    <g transform="translate(250 860)">
+      <circle r="86" fill="#5b9bd5" opacity="0.12"/>
+      <g>{spin}<ellipse rx="108" ry="36" fill="none" stroke="#f0d7a2" stroke-width="1.6"/></g>
+      <g fill="#fff1c2">
+        <circle cx="-96" cy="-6" r="3.4"/><circle cx="-40" cy="-30" r="2.6"/>
+        <circle cx="48" cy="-28" r="2.8"/><circle cx="100" cy="8" r="3.2"/>
+      </g>
+      <circle r="64" fill="url(#sea)" stroke="#102a4a" stroke-width="1.2"/>
+      <path d="M-34-12c8-16 26-18 36-8 4 8-4 14-14 14-12 0-24 0-22-6z" fill="#3f8f6a"/>
+      <path d="M10 14c8-8 26-8 32 2-4 14-22 18-32 8z" fill="#3f8f6a"/>
+      <path d="M-20 30c8-4 16-3 20 3-8 5-16 5-20-3z" fill="#4e9f78"/>
+      <g fill="#fff" opacity="0.8">
+        <path d="M-62 -4c10-14 24-14 36-6-10 2-14 6-18 12-8 0-14-2-18-6z"/>
+        <path d="M12 -44c14-6 30 0 36 10-12 0-20 2-26 8-6-4-10-10-10-18z" opacity="0.9"/>
+        <path d="M-4 34c14-4 30 2 40-6-2 10-14 22-30 22-6-2-10-8-10-16z" opacity="0.7"/>
+      </g>
+      <circle r="64" fill="url(#atmo)"/>
+      <circle r="64" fill="url(#shade)"/>
+      <text x="0" y="116" fill="#f3e6d4" font-family="{SERIF}" font-size="16" text-anchor="middle">Jeepney Router</text>
+    </g>"""
+
+
+def sprout(still: bool) -> str:
+    sway = a(still, '<animateTransform attributeName="transform" type="rotate" values="-3 0 -34;3 0 -34;-3 0 -34" dur="5s" repeatCount="indefinite"/>')
+    return f"""
+    <g transform="translate(560 980)">
+      {body("scale(.9)")}
+      <g>{sway}
+        <path d="M0 -33C1 -46 -1 -58 0 -72" fill="none" stroke="#3f6b52" stroke-width="3" stroke-linecap="round"/>
+        <path d="M0 -62C-14 -78 -30 -74 -32 -58C-18 -56 -6 -56 0 -62Z" fill="#6fae78" stroke="#1f3a2c" stroke-width="1.2" stroke-linejoin="round"/>
+        <path d="M0 -70C14 -88 32 -82 32 -66C18 -64 6 -64 0 -70Z" fill="#8fd08f" stroke="#1f3a2c" stroke-width="1.2" stroke-linejoin="round"/>
+        <path d="M-4 -62C-14 -68 -22 -68 -26 -62M4 -70C14 -76 22 -76 26 -72" fill="none" stroke="#2f5a42" stroke-width="1"/>
+      </g>
+    </g>"""
+
+
+def rose(still: bool) -> str:
+    fall1 = a(still, '<animate attributeName="cy" values="-20;40;-20" dur="9s" repeatCount="indefinite"/><animate attributeName="opacity" values="1;0.2;1" dur="9s" repeatCount="indefinite"/>')
+    fall2 = a(still, '<animate attributeName="cy" values="-70;10;-70" dur="11s" repeatCount="indefinite"/><animate attributeName="opacity" values="0.3;1;0.3" dur="11s" repeatCount="indefinite"/>')
+    petal = 'd="M0 7C16-2 20-32 0-50 -20-32 -16-2 0 7Z"'
+    inner = 'd="M0 5C12 0 14-22 0-36 -14-22 -12 0 0 5Z"'
+    return f"""
+    <g transform="translate(230 1260)">
+      <ellipse cx="0" cy="72" rx="48" ry="9" fill="#000" opacity="0.22"/>
+      {body("translate(0 66) scale(.85)")}
+      <g transform="translate(0 34) scale(.72) translate(0 -34)">
+        <path d="M-2 42C-6 -6 6 -62 -10 -108" fill="none" stroke="#4f7a52" stroke-width="4.5" stroke-linecap="round"/>
+        <path d="M-6 -16C-32 -28 -46 -44 -54 -62C-30 -52 -16 -36 -6 -18" fill="#3f6b52" stroke="#1f3a2c" stroke-width="1"/>
+        <g transform="translate(-8 -118)">
+          <path {petal} fill="#7a2434"/>
+          <path {petal} fill="#7a2434" transform="rotate(60)"/>
+          <path {petal} fill="#7a2434" transform="rotate(120)"/>
+          <path {inner} fill="#d36a74" transform="rotate(30)"/>
+          <path {inner} fill="#d36a74" transform="rotate(90)"/>
+          <path {inner} fill="#d36a74" transform="rotate(150)"/>
+          <circle r="5" fill="#f8e4dc"/>
+        </g>
+        <ellipse cx="-54" cy="-20" rx="6" ry="3.5" fill="#e7a0a8">{fall1}</ellipse>
+        <ellipse cx="36" cy="-70" rx="7" ry="4" fill="#e7a0a8">{fall2}</ellipse>
+      </g>
+      <ellipse cx="0" cy="34" rx="42" ry="7" fill="none" stroke="#d5e8ff" stroke-opacity="0.4" stroke-width="1.2"/>
+      <path d="M-42 34C-46 -40 -24 -128 0 -128 24 -128 46 -40 42 34Z" fill="url(#glass)" stroke="#d5e8ff" stroke-opacity="0.4" stroke-width="1.4"/>
+      <path d="M-33 -10C-35 -56 -22 -104 -8 -116" fill="none" stroke="#fff" stroke-opacity="0.45" stroke-width="2" stroke-linecap="round"/>
+    </g>"""
+
+
+def drawer(still: bool) -> str:
+    p1 = a(still, '<animate attributeName="y" values="-30;-62;-30" dur="7s" repeatCount="indefinite"/><animate attributeName="opacity" values="0.9;0.15;0.9" dur="7s" repeatCount="indefinite"/>')
+    p2 = a(still, '<animate attributeName="y" values="-24;-58;-24" dur="9s" repeatCount="indefinite"/><animate attributeName="opacity" values="0.8;0.1;0.8" dur="9s" repeatCount="indefinite"/>')
+    return f"""
+    <g transform="translate(540 1380) scale(1.3)">
+      <rect x="-10" y="-30" width="8" height="11" fill="#fffaf2" opacity="0.9" transform="rotate(-14)">{p1}</rect>
+      <rect x="14" y="-24" width="7" height="10" fill="#fffaf2" opacity="0.8" transform="rotate(18)">{p2}</rect>
+      {body("translate(0 50) scale(.9)")}
+      <g stroke="#2b1d22" stroke-width="1.1" stroke-linejoin="round">
+        <rect x="-26" y="-9" width="52" height="6" rx="1" fill="#c4895a"/>
+        <rect x="-22" y="-3" width="44" height="14" fill="url(#wood)"/>
+        <rect x="-17" y="2" width="34" height="6" fill="#ffe29a"/>
+        <rect x="-4" y="4" width="8" height="2" fill="#fff" stroke="none"/>
+        <rect x="-24" y="11" width="4" height="9" fill="#7a4a30"/><rect x="20" y="11" width="4" height="9" fill="#7a4a30"/>
+      </g>
+      <ellipse cx="0" cy="9" rx="24" ry="8" fill="url(#glow)"/>
+      <rect x="34" y="6" width="10" height="3" rx="1" fill="#7a4a30" stroke="#2b1d22" stroke-width="1"/>
+      <path d="M36 9V20M42 9V20" stroke="#2b1d22" stroke-width="1.6"/>
+    </g>"""
+
+
+# ---------------------------------------------------------------- build
 def build(still: bool) -> str:
     return f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" width="100%" role="img" aria-labelledby="sceneTitle sceneDesc">
   <title id="sceneTitle">A portrait sky</title>
-  <desc id="sceneDesc">A tall galaxy. Peak Hunter and Jeepney Router share the sky with a rose, a drawer, and unnamed worlds holding a ring, a lantern, books, and a sprout. Stars and dust move through the same background.</desc>
-  <defs>
-    <radialGradient id="space" cx="50%" cy="40%" r="80%">
-      <stop offset="0%" stop-color="#322848"/>
-      <stop offset="48%" stop-color="#141028"/>
-      <stop offset="100%" stop-color="#090712"/>
-    </radialGradient>
-    <radialGradient id="cloudPink" cx="50%" cy="50%" r="50%">
-      <stop offset="0%" stop-color="#e7b4c4" stop-opacity="0.32"/>
-      <stop offset="100%" stop-color="#e7b4c4" stop-opacity="0"/>
-    </radialGradient>
-    <radialGradient id="cloudViolet" cx="50%" cy="50%" r="50%">
-      <stop offset="0%" stop-color="#7d6bb8" stop-opacity="0.4"/>
-      <stop offset="100%" stop-color="#7d6bb8" stop-opacity="0"/>
-    </radialGradient>
-    <radialGradient id="cloudGold" cx="50%" cy="50%" r="50%">
-      <stop offset="0%" stop-color="#f0d7a2" stop-opacity="0.16"/>
-      <stop offset="100%" stop-color="#f0d7a2" stop-opacity="0"/>
-    </radialGradient>
-    <radialGradient id="rock" cx="32%" cy="28%" r="78%">
-      <stop offset="0%" stop-color="#edd8b6"/>
-      <stop offset="48%" stop-color="#a78462"/>
-      <stop offset="100%" stop-color="#4e3428"/>
-    </radialGradient>
-    <radialGradient id="sea" cx="34%" cy="30%" r="75%">
-      <stop offset="0%" stop-color="#e7fbff"/>
-      <stop offset="40%" stop-color="#3e8ea4"/>
-      <stop offset="100%" stop-color="#163848"/>
-    </radialGradient>
-    <linearGradient id="snow" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#fffaf2"/>
-      <stop offset="100%" stop-color="#d5e4f2"/>
-    </linearGradient>
-    <linearGradient id="wood" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#c4895a"/>
-      <stop offset="100%" stop-color="#7a4a30"/>
-    </linearGradient>
-  </defs>
+  <desc id="sceneDesc">A tall storybook galaxy. Peak Hunter and Jeepney Router share the sky with a glass-domed rose, a desk with a drawer, and unnamed worlds holding a ring, a lantern, books, and a sprout. Stars and dust move through the same background.</desc>
+{DEFS}
+  <g mask="url(#my)"><g mask="url(#mx)">
   <rect width="{W}" height="{H}" fill="url(#space)"/>
   {clouds(still)}
+  {band()}
   {dust(still)}
   {stars(still)}
+  {rocks()}
   {ring_world(still)}
   {moon(still)}
   {lantern(still)}
   {peak()}
   {books()}
   {route(still)}
-  {sprout()}
+  {sprout(still)}
   {rose(still)}
-  {drawer()}
+  {drawer(still)}
+  </g></g>
 </svg>
 """
 
@@ -306,8 +381,7 @@ def main():
     root = Path(__file__).resolve().parents[1]
     assets = root / "assets"
     assets.mkdir(exist_ok=True)
-    moving = build(False)
-    (assets / "scene.svg").write_text(moving, encoding="utf-8")
+    (assets / "scene.svg").write_text(build(False), encoding="utf-8")
     (assets / "scene-still.svg").write_text(build(True), encoding="utf-8")
     preview = root / "preview.html"
     preview.write_text(
@@ -317,13 +391,13 @@ def main():
   <meta charset="utf-8">
   <title>Portrait sky</title>
   <style>
-    html, body { margin: 0; background: #090712; }
+    html, body { margin: 0; background: #0d1117; }
     body { display: flex; justify-content: center; }
     object { width: min(460px, 100vw); height: auto; }
   </style>
 </head>
 <body>
-  <object data="assets/scene.svg" type="image/svg+xml" width="460" aria-label="Portrait galaxy with moving stardust, a turning ring, an orbiting moon, a glowing lantern, and falling petals."></object>
+  <object data="assets/scene.svg" type="image/svg+xml" width="460" aria-label="Portrait galaxy with moving stardust, a turning ring, an orbiting moon, a glowing lantern, a swaying sprout, floating pages, and falling petals."></object>
 </body>
 </html>
 """,
