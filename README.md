@@ -5,7 +5,9 @@ Peak Hunter and Jeepney Router have no links while they are private.
 The sky is rebuilt by lab/build_scene.py.
 -->
 
-<img src="assets/scene.svg" alt="A tall galaxy. Peak Hunter and Jeepney Router share the sky with a rose, a drawer, and unnamed worlds holding a ring, a lantern, books, and a sprout. Dust, a moon, a ring, and petals move through the same background." width="460">
+<p align="center">
+  <img src="assets/scene.svg" alt="A tall galaxy. Peak Hunter and Jeepney Router share the sky with a rose, a drawer, and unnamed worlds holding a ring, a lantern, books, and a sprout. Dust, a moon, a ring, and petals move through the same background." width="100%">
+</p>
 
 <details>
 <summary><img src="assets/marks/star.svg" alt="" width="18" height="18" align="absmiddle"> [symbol] [Tool]</summary>

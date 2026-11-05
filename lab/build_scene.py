@@ -245,7 +245,7 @@ def clouds(still: bool) -> str:
 
 
 def build(still: bool) -> str:
-    return f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" role="img" aria-labelledby="sceneTitle sceneDesc">
+    return f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" width="100%" role="img" aria-labelledby="sceneTitle sceneDesc">
   <title id="sceneTitle">A portrait sky</title>
   <desc id="sceneDesc">A tall galaxy. Peak Hunter and Jeepney Router share the sky with a rose, a drawer, and unnamed worlds holding a ring, a lantern, books, and a sprout. Stars and dust move through the same background.</desc>
   <defs>
