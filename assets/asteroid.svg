@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 220" role="img" aria-labelledby="asteroidTitle asteroidDesc">
+  <title id="asteroidTitle">A small asteroid</title>
+  <desc id="asteroidDesc">An irregular rock with two craters, floating in a dark sky.</desc>
+  <defs>
+    <radialGradient id="asteroidSpace" cx="50%" cy="45%" r="70%">
+      <stop offset="0%" stop-color="#1a2748"/>
+      <stop offset="100%" stop-color="#070b16"/>
+    </radialGradient>
+    <radialGradient id="rock" cx="35%" cy="32%" r="75%">
+      <stop offset="0%" stop-color="#d5def2"/>
+      <stop offset="42%" stop-color="#6d7b99"/>
+      <stop offset="100%" stop-color="#2a3348"/>
+    </radialGradient>
+  </defs>
+  <rect width="360" height="220" fill="url(#asteroidSpace)"/>
+  <g fill="#c5d4f2">
+    <circle cx="46" cy="40" r="1.1" opacity="0.7"/>
+    <circle cx="300" cy="36" r="0.8" opacity="0.5"/>
+    <circle cx="326" cy="78" r="1.2" opacity="0.8"/>
+    <circle cx="28" cy="150" r="0.8" opacity="0.45"/>
+    <circle cx="250" cy="48" r="0.7" opacity="0.6"/>
+  </g>
+  <path d="M78 112c8-42 48-62 92-54 28 5 40-16 62-8 34 12 62 18 70 48 8 32-6 58-36 70-38 16-52 28-92 22-46-6-78-22-96-78z" fill="url(#rock)" stroke="#e8eefc" stroke-width="1.3"/>
+  <ellipse cx="132" cy="96" rx="16" ry="11" fill="none" stroke="#1a2233" stroke-width="1.2" opacity="0.55"/>
+  <ellipse cx="196" cy="128" rx="22" ry="14" fill="none" stroke="#1a2233" stroke-width="1.2" opacity="0.4"/>
+  <circle cx="168" cy="86" r="2" fill="#f4f7ff"/>
+</svg>

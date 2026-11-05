@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 340" role="img" aria-labelledby="roseTitle roseDesc">
+  <title id="roseTitle">A rose</title>
+  <desc id="roseDesc">A single rose with a long stem and two leaves, set against a dark sky.</desc>
+  <defs>
+    <radialGradient id="roseSpace" cx="50%" cy="32%" r="75%">
+      <stop offset="0%" stop-color="#24182c"/>
+      <stop offset="55%" stop-color="#120e1c"/>
+      <stop offset="100%" stop-color="#070b16"/>
+    </radialGradient>
+  </defs>
+  <rect width="280" height="340" fill="url(#roseSpace)"/>
+  <g fill="#c5d4f2">
+    <circle cx="36" cy="40" r="1" opacity="0.7"/>
+    <circle cx="236" cy="56" r="0.8" opacity="0.5"/>
+    <circle cx="214" cy="300" r="1" opacity="0.4"/>
+    <circle cx="48" cy="250" r="0.7" opacity="0.45"/>
+  </g>
+  <path d="M140 292 C138 246 150 214 136 176" fill="none" stroke="#8eb8b4" stroke-width="3" stroke-linecap="round"/>
+  <path d="M138 230 C108 214 92 196 86 176 C112 184 128 200 138 222" fill="#7eaea8"/>
+  <path d="M142 198 C176 186 198 168 206 148 C180 158 164 174 148 194" fill="#6f9e98"/>
+  <g transform="translate(140 132)">
+    <ellipse cx="0" cy="-34" rx="16" ry="24" fill="#e7b0c2"/>
+    <ellipse cx="0" cy="-34" rx="16" ry="24" fill="#e7b0c2" transform="rotate(60)"/>
+    <ellipse cx="0" cy="-34" rx="16" ry="24" fill="#e7b0c2" transform="rotate(120)"/>
+    <ellipse cx="0" cy="-34" rx="16" ry="24" fill="#c47d96" transform="rotate(30)"/>
+    <ellipse cx="0" cy="-34" rx="16" ry="24" fill="#c47d96" transform="rotate(90)"/>
+    <ellipse cx="0" cy="-34" rx="16" ry="24" fill="#c47d96" transform="rotate(150)"/>
+    <circle r="11" fill="#f6d5df"/>
+  </g>
+  <g transform="translate(214 48)" fill="none" stroke="#f4f7ff" stroke-width="1.1" stroke-linejoin="round">
+    <path d="M0-10 2.4-3.2 10-3.2 3.8 1.2 6 8.4 0 4.2-6 8.4-3.8 1.2-10-3.2-2.4-3.2Z"/>
+  </g>
+</svg>

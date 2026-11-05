@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 260" role="img" aria-labelledby="peakTitle peakDesc">
+  <title id="peakTitle">Peak Hunter</title>
+  <desc id="peakDesc">A round planet in a dark sky, with one pale mountain rising from its surface.</desc>
+  <defs>
+    <radialGradient id="peakSpace" cx="50%" cy="42%" r="72%">
+      <stop offset="0%" stop-color="#1a2748"/>
+      <stop offset="100%" stop-color="#070b16"/>
+    </radialGradient>
+    <radialGradient id="peakBody" cx="36%" cy="34%" r="72%">
+      <stop offset="0%" stop-color="#d5e4ff"/>
+      <stop offset="40%" stop-color="#6e82aa"/>
+      <stop offset="100%" stop-color="#171e2e"/>
+    </radialGradient>
+    <clipPath id="peakDisc">
+      <circle cx="180" cy="132" r="74"/>
+    </clipPath>
+  </defs>
+  <rect width="360" height="260" fill="url(#peakSpace)"/>
+  <ellipse cx="120" cy="70" rx="90" ry="36" fill="#6d5bd0" opacity="0.16"/>
+  <g fill="#c5d4f2">
+    <circle cx="42" cy="46" r="1.1" opacity="0.75"/>
+    <circle cx="308" cy="58" r="0.8" opacity="0.55"/>
+    <circle cx="330" cy="168" r="1.2" opacity="0.7"/>
+    <circle cx="48" cy="200" r="0.8" opacity="0.5"/>
+  </g>
+  <circle cx="180" cy="132" r="78" fill="none" stroke="#9eb6e8" stroke-width="6" opacity="0.18"/>
+  <circle cx="180" cy="132" r="74" fill="url(#peakBody)"/>
+  <g clip-path="url(#peakDisc)">
+    <path d="M108 190 L166 78 L186 124 L214 92 L258 190 Z" fill="#f4f7ff" opacity="0.92"/>
+    <path d="M166 78 L178 124 L156 116 Z" fill="#9aafd4" opacity="0.85"/>
+  </g>
+  <circle cx="180" cy="132" r="74" fill="none" stroke="#e8eefc" stroke-width="1.2"/>
+</svg>
