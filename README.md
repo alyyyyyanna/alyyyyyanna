@@ -4,7 +4,7 @@ Stars can be added, removed, renamed, or reshuffled.
 Peak Hunter and Jeepney Router have no links while they are private.
 -->
 
-# [Your name]
+# Alyanna Marie Miñoza
 
 <img src="assets/asteroid.svg" alt="A small asteroid, an irregular pale rock with two craters, floating in a dark sky." width="360">
 
