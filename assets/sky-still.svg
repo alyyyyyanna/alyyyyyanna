@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 420" role="img" aria-labelledby="skyTitle skyDesc">
+  <title id="skyTitle">Scattered placeholder stars, still</title>
+  <desc id="skyDesc">The same eight placeholder stars on a dark galaxy sky, drawn without motion.</desc>
+  <defs>
+    <radialGradient id="space" cx="50%" cy="42%" r="70%">
+      <stop offset="0%" stop-color="#1a2748"/>
+      <stop offset="55%" stop-color="#0c1224"/>
+      <stop offset="100%" stop-color="#060810"/>
+    </radialGradient>
+    <radialGradient id="nebula-violet" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#6d5bd0" stop-opacity="0.45"/>
+      <stop offset="100%" stop-color="#6d5bd0" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="nebula-blue" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#3d7ea6" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#3d7ea6" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="760" height="420" fill="url(#space)"/>
+  <ellipse cx="250" cy="160" rx="210" ry="90" fill="url(#nebula-violet)"/>
+  <ellipse cx="520" cy="250" rx="180" ry="80" fill="url(#nebula-blue)"/>
+  <g fill="#c5d4f2" opacity="0.55">
+    <circle cx="48" cy="40" r="1.1"/>
+    <circle cx="170" cy="36" r="0.8"/>
+    <circle cx="300" cy="54" r="1.2"/>
+    <circle cx="470" cy="42" r="0.7"/>
+    <circle cx="700" cy="48" r="1"/>
+    <circle cx="40" cy="150" r="0.8"/>
+    <circle cx="320" cy="210" r="0.9"/>
+    <circle cx="460" cy="170" r="1.1"/>
+    <circle cx="700" cy="180" r="0.7"/>
+    <circle cx="180" cy="280" r="0.8"/>
+    <circle cx="430" cy="340" r="1"/>
+    <circle cx="560" cy="360" r="0.7"/>
+    <circle cx="720" cy="300" r="1.1"/>
+    <circle cx="250" cy="380" r="0.8"/>
+  </g>
+  <g fill="none" stroke="#e8eefc" stroke-width="1.4" stroke-linejoin="round">
+    <g transform="translate(118 78)">
+      <path d="M0-16 4.2-5.2 16-5.2 6.4 2.2 10 14 0 7.2-10 14-6.4 2.2-16-5.2-4.2-5.2Z"/>
+    </g>
+    <g transform="translate(604 64)">
+      <path d="M0-16 4.2-5.2 16-5.2 6.4 2.2 10 14 0 7.2-10 14-6.4 2.2-16-5.2-4.2-5.2Z"/>
+    </g>
+    <g transform="translate(214 188)" fill="#d5e4ff">
+      <path d="M0-16 4.2-5.2 16-5.2 6.4 2.2 10 14 0 7.2-10 14-6.4 2.2-16-5.2-4.2-5.2Z"/>
+    </g>
+    <g transform="translate(390 128)">
+      <path d="M0-12 3.2-3.9 12-3.9 4.8 1.6 7.5 10.5 0 5.4-7.5 10.5-4.8 1.6-12-3.9-3.2-3.9Z"/>
+    </g>
+    <g transform="translate(548 214)">
+      <path d="M0-16 4.2-5.2 16-5.2 6.4 2.2 10 14 0 7.2-10 14-6.4 2.2-16-5.2-4.2-5.2Z"/>
+    </g>
+    <g transform="translate(96 312)">
+      <path d="M0-12 3.2-3.9 12-3.9 4.8 1.6 7.5 10.5 0 5.4-7.5 10.5-4.8 1.6-12-3.9-3.2-3.9Z"/>
+    </g>
+    <g transform="translate(336 300)" fill="#d5e4ff">
+      <path d="M0-16 4.2-5.2 16-5.2 6.4 2.2 10 14 0 7.2-10 14-6.4 2.2-16-5.2-4.2-5.2Z"/>
+    </g>
+    <g transform="translate(640 328)">
+      <path d="M0-12 3.2-3.9 12-3.9 4.8 1.6 7.5 10.5 0 5.4-7.5 10.5-4.8 1.6-12-3.9-3.2-3.9Z"/>
+    </g>
+  </g>
+  <g fill="#d5def2" font-family="Palatino, Georgia, serif" font-size="15" text-anchor="middle">
+    <text x="118" y="112">[tool]</text>
+    <text x="604" y="98">[certificate]</text>
+    <text x="214" y="222">[language]</text>
+    <text x="390" y="156">[surprise]</text>
+    <text x="548" y="248">[skill]</text>
+    <text x="96" y="340">[framework]</text>
+    <text x="336" y="334">[language]</text>
+    <text x="640" y="356">[tool]</text>
+  </g>
+</svg>
