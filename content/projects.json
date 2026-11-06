@@ -1,0 +1,32 @@
+[
+  {
+    "id": "peak-hunter",
+    "title": "Peak Hunter",
+    "image": "assets/planet-peak.svg",
+    "imageSide": "left",
+    "badge": "PRIVATE",
+    "description": "[A short description, in your words.]",
+    "detail": "Still exploring. No public link yet.",
+    "tags": ["[tag]", "[tag]", "[tag]"]
+  },
+  {
+    "id": "lantern-world",
+    "title": "The lantern world",
+    "image": "assets/lantern-world.svg",
+    "imageSide": "right",
+    "badge": "",
+    "description": "[A future project. Your sentences, when you have them.]",
+    "detail": "[More about this world, if you want it.]",
+    "tags": ["[tag]", "[tag]", "[tag]"]
+  },
+  {
+    "id": "jeepney-router",
+    "title": "Jeepney Router",
+    "image": "assets/planet-route.svg",
+    "imageSide": "left",
+    "badge": "PRIVATE",
+    "description": "[A short description, in your words.]",
+    "detail": "Still exploring. No public link yet.",
+    "tags": ["[tag]", "[tag]", "[tag]"]
+  }
+]

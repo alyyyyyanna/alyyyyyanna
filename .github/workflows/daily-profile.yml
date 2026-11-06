@@ -1,0 +1,28 @@
+name: Daily quote and activity
+
+on:
+  schedule:
+    # 16:05 UTC is 00:05 at UTC+8, so the quote turns over on your local day.
+    - cron: "5 16 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install fonttools
+      - run: python lab/update_daily.py
+      - name: Commit the day
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/profile/activity.svg assets/profile/quote.svg content/stats.json
+          git diff --staged --quiet || git commit -m "Rotate the daily quote and refresh activity numbers"
+          git push

@@ -1,229 +1,62 @@
 <!--
-Front cover later: Alyanna Marie Miñoza, and the short landing sentence.
-Brackets are yours to replace. Each picture sits beside the lines for that world.
-Peak Hunter and Jeepney Router have no links while they are private.
-The sky is rebuilt by lab/build_scene.py.
+The pictures are built from the files in content/.
+
+name, scroll text, welcome line, and the four [link] labels under the portrait: content/profile.json
+one project per object, in order: content/projects.json
+  image is a planet file already in assets/, or a new one
+  imageSide is "left" or "right"
+  badge is "PRIVATE" or ""
+  description, detail, and tags are the words on the card
+stack icons: drop an .svg or .png into assets/stacks, then rebuild.
+  name them 01-something.svg, 02-something.svg to set the order
+quotes, one per line: content/quotes.txt
+usernames: content/stats.json
+  github_username is already set
+  leetcode_username and duolingo_username stay empty until you fill them
+  with no Duolingo username, the lower number counts up by one each day
+
+Rebuild after an edit:
+  python lab/build_profile.py
+
+A daily workflow rewrites the quote and the activity numbers.
+The portrait is assets/portrait.png. Replace that file and rebuild when you have a clearer one.
 -->
 
-# Worlds from one sky.
+<p align="center">
+  <img src="assets/profile/header.svg" alt="Alyanna Marie Minoza" width="100%">
+</p>
 
-[One or two sentences you write. The visitor has just landed.]
+<br>
 
-## Planets
+<p align="center">
+  <img src="assets/profile/tagline.svg" alt="code that tells a story" width="100%">
+</p>
 
-<table>
-<tr>
-<td width="88"><img src="assets/ring-world.svg" alt="A tiny ringed world with an orbiting moon." width="84"></td>
-<td valign="top" width="50%">
+<p align="center">
+  <img src="assets/profile/stack-field.svg" alt="stack" width="100%">
+</p>
 
-**The ringed world**
+<p align="center">
+  <img src="assets/profile/projects-label.svg" alt="projects" width="100%">
+</p>
 
-[A future project. Your sentences, when you have them.]
-
-[More about this world, if you want it.]
-
-✰ `[tag]` · ✰ `[tag]` · ✰ `[tag]`
-
-</td>
-<td width="88"><img src="assets/lantern-world.svg" alt="A rocky world carrying a glowing lantern." width="84"></td>
-<td valign="top">
-
-**The lantern world**
-
-[A future project. Your sentences, when you have them.]
-
-[More about this world, if you want it.]
-
-✰ `[tag]` · ✰ `[tag]` · ✰ `[tag]`
-
-</td>
-</tr>
-<tr>
-<td width="88"><img src="assets/planet-peak.svg" alt="A small rocky world with a snowy mountain." width="84"></td>
-<td valign="top">
-
-**Peak Hunter** · private
-
-[A short description, in your words.]
-
-Still exploring. No public link yet.
-
-✰ `[tag]` · ✰ `[tag]` · ✰ `[tag]`
-
-</td>
-<td width="88"><img src="assets/books-world.svg" alt="A rocky world with books, a globe, and an open map." width="84"></td>
-<td valign="top">
-
-**The books world**
-
-[A future project. Your sentences, when you have them.]
-
-[More about this world, if you want it.]
-
-✰ `[tag]` · ✰ `[tag]` · ✰ `[tag]`
-
-</td>
-</tr>
-<tr>
-<td width="88"><img src="assets/planet-route.svg" alt="A blue world circled by a route of warm lights." width="84"></td>
-<td valign="top">
-
-**Jeepney Router** · private
-
-[A short description, in your words.]
-
-Still exploring. No public link yet.
-
-✰ `[tag]` · ✰ `[tag]` · ✰ `[tag]`
-
-</td>
-<td width="88"><img src="assets/sprout-world.svg" alt="A rocky world with a gently swaying sprout." width="84"></td>
-<td valign="top">
-
-**The sprout world**
-
-[A future project. Your sentences, when you have them.]
-
-[More about this world, if you want it.]
-
-✰ `[tag]` · ✰ `[tag]` · ✰ `[tag]`
-
-</td>
-</tr>
-</table>
-
-## Stars
+<p align="center">
+  <img src="assets/profile/cards/peak-hunter.svg" alt="Peak Hunter" width="100%">
+</p>
+<p align="center">
+  <img src="assets/profile/cards/lantern-world.svg" alt="The lantern world" width="100%">
+</p>
+<p align="center">
+  <img src="assets/profile/cards/jeepney-router.svg" alt="Jeepney Router" width="100%">
+</p>
 
 <table>
 <tr>
-<td width="280"><img src="assets/sky.svg" alt="A painted galaxy filled with labeled stars." width="280"></td>
-<td valign="top">
-
-**Constellation**
-
-[What this field of stars is for, in your words.]
-
-Languages, tools, skills, certificates, and surprises, mixed together.
-
+<td width="58%" valign="top">
+<img src="assets/profile/activity.svg" alt="activity" width="100%">
+</td>
+<td width="42%" valign="top">
+<img src="assets/profile/quote.svg" alt="A quote that changes every day" width="100%">
 </td>
 </tr>
 </table>
-
-<table>
-<tr>
-<td width="36"><img src="assets/marks/star.svg" alt="" width="28" height="28"></td>
-<td valign="top" width="50%">
-
-**[symbol]** · tool
-
-[What appears when it opens.]
-
-</td>
-<td width="36"><img src="assets/marks/star.svg" alt="" width="28" height="28"></td>
-<td valign="top">
-
-**[symbol]** · certificate
-
-[Issuer, year if you want it public, one sentence.]
-
-</td>
-</tr>
-<tr>
-<td><img src="assets/marks/star.svg" alt="" width="28" height="28"></td>
-<td valign="top">
-
-**[symbol]** · language
-
-[What appears when it opens.]
-
-</td>
-<td><img src="assets/marks/star.svg" alt="" width="28" height="28"></td>
-<td valign="top">
-
-**[symbol]** · surprise
-
-[A hidden note.]
-
-</td>
-</tr>
-<tr>
-<td><img src="assets/marks/star.svg" alt="" width="28" height="28"></td>
-<td valign="top">
-
-**[symbol]** · skill
-
-[What appears when it opens.]
-
-</td>
-<td><img src="assets/marks/star.svg" alt="" width="28" height="28"></td>
-<td valign="top">
-
-**[symbol]** · framework
-
-[What appears when it opens.]
-
-</td>
-</tr>
-<tr>
-<td><img src="assets/marks/star.svg" alt="" width="28" height="28"></td>
-<td valign="top">
-
-**[symbol]** · language
-
-[What appears when it opens.]
-
-</td>
-<td><img src="assets/marks/star.svg" alt="" width="28" height="28"></td>
-<td valign="top">
-
-**[symbol]** · tool
-
-[What appears when it opens.]
-
-</td>
-</tr>
-</table>
-
-## Close to the asteroid
-
-<table>
-<tr>
-<td width="88"><img src="assets/rose.svg" alt="A rose growing from a tiny asteroid." width="84"></td>
-<td valign="top" width="50%">
-
-**[What you care for]**
-
-[Your sentences. This sits apart from the planets.]
-
-</td>
-<td width="88"><img src="assets/drawer.svg" alt="A tiny world with an open wooden drawer." width="84"></td>
-<td valign="top">
-
-**[A quote, a joke, or a hidden note]**
-
-[Your words.]
-
-</td>
-</tr>
-<tr>
-<td width="200"><img src="assets/path.svg" alt="A trail of warm stars crossing the galaxy." width="200"></td>
-<td valign="top" colspan="3">
-
-**[What you are learning]**
-
-[Your sentences.]
-
-[The next thing on the path.]
-
-✰ `[tag]` · ✰ `[tag]` · ✰ `[tag]`
-
-</td>
-</tr>
-</table>
-
-<details>
-<summary>Original composed scene</summary>
-
-<img src="assets/scene.svg" alt="The original tall portrait galaxy combining all the worlds." width="460">
-
-</details>
