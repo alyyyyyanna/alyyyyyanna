@@ -2,6 +2,8 @@
   <title id="routeTitle">Jeepney Router</title>
   <desc id="routeDesc">A small world in a painted galaxy, circled by a route of warm little lights.</desc>
   <defs>
+    <filter id="edgeBlur" x="0" y="0" width="360" height="300" filterUnits="userSpaceOnUse"><feGaussianBlur stdDeviation="10"/></filter>
+    <mask id="edgeFade" x="0" y="0" width="360" height="300" maskUnits="userSpaceOnUse"><rect x="30" y="30" width="300" height="240" rx="18" fill="#fff" filter="url(#edgeBlur)"/></mask>
     <radialGradient id="space" cx="50%" cy="45%" r="75%">
       <stop offset="0%" stop-color="#1b2744"/>
       <stop offset="100%" stop-color="#090712"/>
@@ -12,6 +14,7 @@
       <stop offset="100%" stop-color="#1a3c4e"/>
     </radialGradient>
   </defs>
+  <g mask="url(#edgeFade)">
   <rect width="360" height="300" rx="18" fill="url(#space)"/>
   <ellipse cx="80" cy="80" rx="90" ry="36" fill="#7d6bb8" opacity="0.22"/>
   <ellipse cx="270" cy="230" rx="100" ry="36" fill="#e7b4c4" opacity="0.16"/>
@@ -30,4 +33,5 @@
   <path d="M128 132c18 16 36 18 62 4 16-8 28-6 40 6" fill="none" stroke="#f7e7b4" stroke-width="2.2" stroke-linecap="round"/>
   <path d="M146 168c22-6 40 2 58 16" fill="none" stroke="#d7f3ef" stroke-width="2" opacity="0.7" stroke-linecap="round"/>
   <circle cx="168" cy="146" r="3" fill="#fff6d8"/>
+  </g>
 </svg>

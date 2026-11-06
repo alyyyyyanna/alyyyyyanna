@@ -54,6 +54,15 @@
     </g>
   </defs>
 
+  <defs>
+    <filter id="assetEdgeBlur" x="458" y="550" width="204" height="196" filterUnits="userSpaceOnUse">
+      <feGaussianBlur stdDeviation="6.9"/>
+    </filter>
+    <mask id="assetEdgeFade" x="458" y="550" width="204" height="196" maskUnits="userSpaceOnUse">
+      <rect x="478.7" y="570.7" width="162.6" height="154.6" rx="18" fill="#fff" filter="url(#assetEdgeBlur)"/>
+    </mask>
+  </defs>
+  <g mask="url(#assetEdgeFade)">
   <rect x="458" y="550" width="204" height="196" rx="18" fill="url(#space)"/>
   <ellipse cx="515.12" cy="599.0" rx="85.67999999999999" ry="39.2" fill="url(#cloudViolet)"/>
   <ellipse cx="617.12" cy="691.12" rx="91.8" ry="39.2" fill="url(#cloudPink)"/>
@@ -78,4 +87,5 @@
       <path d="M14 -8L18 8M28 -9L30 4" stroke="#b7a07a" stroke-width="1"/>
       <path d="M32 -2L38 4M38 -2L32 4" stroke="#c8453f" stroke-width="1.6" stroke-linecap="round"/>
     </g>
+  </g>
 </svg>

@@ -2,6 +2,8 @@
   <title id="roseTitle">A rose</title>
   <desc id="roseDesc">A large rose growing from a tiny asteroid, with drifting petals and a distant blue world.</desc>
   <defs>
+    <filter id="edgeBlur" x="0" y="0" width="340" height="500" filterUnits="userSpaceOnUse"><feGaussianBlur stdDeviation="12"/></filter>
+    <mask id="edgeFade" x="0" y="0" width="340" height="500" maskUnits="userSpaceOnUse"><rect x="36" y="36" width="268" height="428" rx="18" fill="#fff" filter="url(#edgeBlur)"/></mask>
     <radialGradient id="space" cx="50%" cy="28%" r="80%">
       <stop offset="0%" stop-color="#4a3a55"/>
       <stop offset="42%" stop-color="#241c36"/>
@@ -17,6 +19,7 @@
       <stop offset="100%" stop-color="#5a4032"/>
     </radialGradient>
   </defs>
+  <g mask="url(#edgeFade)">
   <rect width="340" height="500" rx="18" fill="url(#space)"/>
   <ellipse cx="70" cy="90" rx="90" ry="46" fill="#f0c2cc" opacity="0.28"/>
   <ellipse cx="250" cy="150" rx="110" ry="50" fill="#e7b4c4" opacity="0.2"/>
@@ -62,5 +65,6 @@
     </g>
     <path d="M0 2 C8-6 6-16 0-18 C-6-16 -8-6 0 2 C4 8 8 10 0 14 C-8 10 -4 8 0 2Z" fill="#f3c4c6"/>
     <circle r="5" fill="#f8e4dc"/>
+  </g>
   </g>
 </svg>

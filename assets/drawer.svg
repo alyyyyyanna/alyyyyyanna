@@ -2,6 +2,8 @@
   <title id="drawerTitle">A small drawer</title>
   <desc id="drawerDesc">A tiny asteroid in a painted galaxy, with a wooden drawer pulled open and a blank note inside.</desc>
   <defs>
+    <filter id="edgeBlur" x="0" y="0" width="360" height="260" filterUnits="userSpaceOnUse"><feGaussianBlur stdDeviation="9"/></filter>
+    <mask id="edgeFade" x="0" y="0" width="360" height="260" maskUnits="userSpaceOnUse"><rect x="27" y="27" width="306" height="206" rx="18" fill="#fff" filter="url(#edgeBlur)"/></mask>
     <radialGradient id="space" cx="50%" cy="40%" r="75%">
       <stop offset="0%" stop-color="#241c3e"/>
       <stop offset="100%" stop-color="#090712"/>
@@ -15,6 +17,7 @@
       <stop offset="100%" stop-color="#7a4a30"/>
     </linearGradient>
   </defs>
+  <g mask="url(#edgeFade)">
   <rect width="360" height="260" rx="18" fill="url(#space)"/>
   <ellipse cx="80" cy="50" rx="80" ry="30" fill="#e7b4c4" opacity="0.2"/>
   <ellipse cx="280" cy="70" rx="70" ry="26" fill="#7d6bb8" opacity="0.22"/>
@@ -31,4 +34,5 @@
   <rect x="168" y="162" width="24" height="6" rx="2" fill="#fff1c2"/>
   <path d="M156 138 h36 l6 8 h-40 z" fill="#fffaf2"/>
   <path d="M162 141 h24 M164 144 h18" stroke="#d7c4a4" stroke-width="1"/>
+  </g>
 </svg>

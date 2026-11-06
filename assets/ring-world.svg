@@ -54,6 +54,15 @@
     </g>
   </defs>
 
+  <defs>
+    <filter id="assetEdgeBlur" x="58" y="48" width="224" height="224" filterUnits="userSpaceOnUse">
+      <feGaussianBlur stdDeviation="7.8"/>
+    </filter>
+    <mask id="assetEdgeFade" x="58" y="48" width="224" height="224" maskUnits="userSpaceOnUse">
+      <rect x="81.4" y="71.4" width="177.2" height="177.2" rx="18" fill="#fff" filter="url(#assetEdgeBlur)"/>
+    </mask>
+  </defs>
+  <g mask="url(#assetEdgeFade)">
   <rect x="58" y="48" width="224" height="224" rx="18" fill="url(#space)"/>
   <ellipse cx="120.72" cy="104.0" rx="94.08" ry="44.800000000000004" fill="url(#cloudViolet)"/>
   <ellipse cx="232.72" cy="209.28" rx="100.8" ry="44.800000000000004" fill="url(#cloudPink)"/>
@@ -70,4 +79,5 @@
     <g transform="translate(170 170)">
       <g><animateTransform attributeName="transform" type="rotate" from="0" to="360" dur="12s" repeatCount="indefinite"/><circle cx="86" cy="0" r="5" fill="#fff6d8"/></g>
     </g>
+  </g>
 </svg>

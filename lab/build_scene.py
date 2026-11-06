@@ -386,14 +386,26 @@ def standalone(
 ) -> str:
     """Wrap one scene element in its own self-contained SVG card."""
     x, y, width, height = view_box
+    blur = round(min(width, height) * 0.035, 1)
+    inset = round(blur * 3, 1)
     return f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="{x} {y} {width} {height}" role="img" aria-labelledby="assetTitle assetDesc">
   <title id="assetTitle">{title}</title>
   <desc id="assetDesc">{description}</desc>
 {DEFS}
+  <defs>
+    <filter id="assetEdgeBlur" x="{x}" y="{y}" width="{width}" height="{height}" filterUnits="userSpaceOnUse">
+      <feGaussianBlur stdDeviation="{blur}"/>
+    </filter>
+    <mask id="assetEdgeFade" x="{x}" y="{y}" width="{width}" height="{height}" maskUnits="userSpaceOnUse">
+      <rect x="{x + inset}" y="{y + inset}" width="{width - inset * 2}" height="{height - inset * 2}" rx="18" fill="#fff" filter="url(#assetEdgeBlur)"/>
+    </mask>
+  </defs>
+  <g mask="url(#assetEdgeFade)">
   <rect x="{x}" y="{y}" width="{width}" height="{height}" rx="18" fill="url(#space)"/>
   <ellipse cx="{x + width * 0.28}" cy="{y + height * 0.25}" rx="{width * 0.42}" ry="{height * 0.2}" fill="url(#cloudViolet)"/>
   <ellipse cx="{x + width * 0.78}" cy="{y + height * 0.72}" rx="{width * 0.45}" ry="{height * 0.2}" fill="url(#cloudPink)"/>
   {content}
+  </g>
 </svg>
 """
 

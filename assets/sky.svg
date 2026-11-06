@@ -2,6 +2,8 @@
   <title id="skyTitle">Scattered placeholder stars</title>
   <desc id="skyDesc">A painted galaxy with eight labeled stars scattered among smaller stars and soft clouds.</desc>
   <defs>
+    <filter id="edgeBlur" x="0" y="0" width="760" height="420" filterUnits="userSpaceOnUse"><feGaussianBlur stdDeviation="14"/></filter>
+    <mask id="edgeFade" x="0" y="0" width="760" height="420" maskUnits="userSpaceOnUse"><rect x="42" y="42" width="676" height="336" rx="18" fill="#fff" filter="url(#edgeBlur)"/></mask>
     <radialGradient id="space" cx="50%" cy="40%" r="75%">
       <stop offset="0%" stop-color="#2a2044"/>
       <stop offset="48%" stop-color="#141028"/>
@@ -20,6 +22,7 @@
       <stop offset="100%" stop-color="#7d6bb8" stop-opacity="0"/>
     </radialGradient>
   </defs>
+  <g mask="url(#edgeFade)">
   <rect width="760" height="420" fill="url(#space)"/>
   <ellipse cx="180" cy="120" rx="220" ry="90" fill="url(#cloudViolet)"/>
   <ellipse cx="540" cy="250" rx="240" ry="110" fill="url(#cloudPink)"/>
@@ -54,5 +57,6 @@
     <text x="96" y="340">[framework]</text>
     <text x="336" y="338">[language]</text>
     <text x="640" y="356">[tool]</text>
+  </g>
   </g>
 </svg>

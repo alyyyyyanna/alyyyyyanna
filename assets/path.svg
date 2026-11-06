@@ -2,12 +2,15 @@
   <title id="pathTitle">A path across the sky</title>
   <desc id="pathDesc">A trail of warm stars crossing a painted galaxy toward one brighter star.</desc>
   <defs>
+    <filter id="edgeBlur" x="0" y="0" width="720" height="200" filterUnits="userSpaceOnUse"><feGaussianBlur stdDeviation="8"/></filter>
+    <mask id="edgeFade" x="0" y="0" width="720" height="200" maskUnits="userSpaceOnUse"><rect x="24" y="24" width="672" height="152" rx="18" fill="#fff" filter="url(#edgeBlur)"/></mask>
     <linearGradient id="space" x1="0" y1="0" x2="1" y2="0">
       <stop offset="0%" stop-color="#141028"/>
       <stop offset="55%" stop-color="#2a2044"/>
       <stop offset="100%" stop-color="#1a2744"/>
     </linearGradient>
   </defs>
+  <g mask="url(#edgeFade)">
   <rect width="720" height="200" rx="18" fill="url(#space)"/>
   <ellipse cx="180" cy="40" rx="160" ry="50" fill="#e7b4c4" opacity="0.18"/>
   <ellipse cx="520" cy="150" rx="180" ry="50" fill="#7d6bb8" opacity="0.2"/>
@@ -30,4 +33,5 @@
   </g>
   <ellipse cx="96" cy="150" rx="16" ry="10" fill="#a78462"/>
   <ellipse cx="250" cy="46" rx="12" ry="8" fill="#8d6b4e"/>
+  </g>
 </svg>

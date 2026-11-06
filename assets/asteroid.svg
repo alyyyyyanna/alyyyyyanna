@@ -2,6 +2,8 @@
   <title id="asteroidTitle">A small asteroid</title>
   <desc id="asteroidDesc">A lumpy little world floating in a painted galaxy, with craters and one warm light.</desc>
   <defs>
+    <filter id="edgeBlur" x="0" y="0" width="360" height="280" filterUnits="userSpaceOnUse"><feGaussianBlur stdDeviation="10"/></filter>
+    <mask id="edgeFade" x="0" y="0" width="360" height="280" maskUnits="userSpaceOnUse"><rect x="30" y="30" width="300" height="220" rx="18" fill="#fff" filter="url(#edgeBlur)"/></mask>
     <radialGradient id="space" cx="50%" cy="42%" r="75%">
       <stop offset="0%" stop-color="#2a2044"/>
       <stop offset="100%" stop-color="#090712"/>
@@ -16,6 +18,7 @@
       <stop offset="100%" stop-color="#e7b4c4" stop-opacity="0"/>
     </radialGradient>
   </defs>
+  <g mask="url(#edgeFade)">
   <rect width="360" height="280" rx="18" fill="url(#space)"/>
   <ellipse cx="90" cy="70" rx="80" ry="36" fill="url(#pink)"/>
   <ellipse cx="260" cy="200" rx="90" ry="40" fill="#7d6bb8" opacity="0.22"/>
@@ -31,4 +34,5 @@
   <ellipse cx="176" cy="112" rx="10" ry="7" fill="#6d4e3a" opacity="0.3"/>
   <ellipse cx="150" cy="118" rx="22" ry="10" fill="#fff6e8" opacity="0.28"/>
   <circle cx="196" cy="124" r="3.2" fill="#fff1c2"/>
+  </g>
 </svg>
