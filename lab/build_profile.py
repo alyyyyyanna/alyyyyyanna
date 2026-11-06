@@ -7,6 +7,7 @@ The daily workflow only refreshes the quote and the activity numbers.
 from __future__ import annotations
 
 import base64
+import hashlib
 import json
 import math
 import random
@@ -324,12 +325,21 @@ def load_json(path: Path):
     return json.loads(path.read_text(encoding="utf-8"))
 
 
+def shown_quote(line: str) -> str:
+    """The words on the picture. Credits after an em dash are left off."""
+    text = line.strip()
+    for mark in (" — ", " – "):
+        if mark in text:
+            text = text.split(mark, 1)[0].rstrip()
+    return text
+
+
 def quotes() -> list[str]:
     lines = []
     for line in (ROOT / "content" / "quotes.txt").read_text(encoding="utf-8").splitlines():
         stripped = line.strip()
         if stripped and not stripped.startswith("#"):
-            lines.append(stripped)
+            lines.append(shown_quote(stripped))
     return lines or ["quotes that change every day"]
 
 
@@ -1032,7 +1042,11 @@ def build_quote(text: str, script: Font) -> str:
     return document(width, height, "", body, text, "The quote for today.")
 
 
-def write_readme(projects: list[dict]) -> None:
+def stamp(value: str) -> str:
+    return hashlib.sha1(value.encode("utf-8")).hexdigest()[:8]
+
+
+def write_readme(projects: list[dict], quote: str, stats: dict) -> None:
     cards = "\n".join(
         "\n".join(
             [
@@ -1055,16 +1069,14 @@ one project per object, in order: content/projects.json
 stack icons: drop an .svg or .png into assets/stacks, then rebuild.
   name them 01-something.svg, 02-something.svg to set the order
 quotes, one per line: content/quotes.txt
+  a credit after an em dash is kept in the file and left off the picture
 usernames: content/stats.json
   github_username is already set
   leetcode_username and duolingo_username stay empty until you fill them
   with no Duolingo username, the lower number counts up by one each day
 
-Rebuild after an edit:
-  python lab/build_profile.py
-
-A daily workflow rewrites the quote and the activity numbers.
-The portrait is assets/portrait.png. Replace that file and rebuild when you have a clearer one.
+Pushing a change in content/ redraws the pictures on GitHub.
+The picture address changes with the words, so the page does not keep the old drawing.
 -->
 
 <p align="center">
@@ -1090,10 +1102,10 @@ The portrait is assets/portrait.png. Replace that file and rebuild when you have
 <table>
 <tr>
 <td width="58%" valign="top">
-<img src="assets/profile/activity.svg" alt="activity" width="100%">
+<img src="assets/profile/activity.svg?v={stamp(json.dumps([stats.get('github_contributions'), stats.get('github_streak'), stats.get('leetcode_solved'), activity_number(stats)], default=str))}" alt="activity" width="100%">
 </td>
 <td width="42%" valign="top">
-<img src="assets/profile/quote.svg" alt="A quote that changes every day" width="100%">
+<img src="assets/profile/quote.svg?v={stamp(quote)}" alt="A quote that changes every day" width="100%">
 </td>
 </tr>
 </table>
@@ -1155,8 +1167,9 @@ def build_all(advance_counter: bool = False) -> None:
     for project in projects:
         save(ROOT / "assets" / "profile" / "cards" / f"{project['id']}.svg", build_card(project, serif, italic))
     save(ROOT / "assets" / "profile" / "activity.svg", build_activity(stats, script, serif, italic))
-    save(ROOT / "assets" / "profile" / "quote.svg", build_quote(quote_for(), script))
-    write_readme(projects)
+    quote = quote_for()
+    save(ROOT / "assets" / "profile" / "quote.svg", build_quote(quote, script))
+    write_readme(projects, quote, stats)
     write_preview(projects)
 
 
@@ -1167,7 +1180,10 @@ def refresh_daily() -> None:
     stats = refresh_stats(load_json(stats_path), advance_counter=True)
     save(stats_path, json.dumps(stats, indent=2) + "\n")
     save(ROOT / "assets" / "profile" / "activity.svg", build_activity(stats, script, serif, italic))
-    save(ROOT / "assets" / "profile" / "quote.svg", build_quote(quote_for(), script))
+    quote = quote_for()
+    save(ROOT / "assets" / "profile" / "quote.svg", build_quote(quote, script))
+    projects = load_json(ROOT / "content" / "projects.json")
+    write_readme(projects, quote, stats)
 
 
 if __name__ == "__main__":

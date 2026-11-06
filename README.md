@@ -10,16 +10,14 @@ one project per object, in order: content/projects.json
 stack icons: drop an .svg or .png into assets/stacks, then rebuild.
   name them 01-something.svg, 02-something.svg to set the order
 quotes, one per line: content/quotes.txt
+  a credit after an em dash is kept in the file and left off the picture
 usernames: content/stats.json
   github_username is already set
   leetcode_username and duolingo_username stay empty until you fill them
   with no Duolingo username, the lower number counts up by one each day
 
-Rebuild after an edit:
-  python lab/build_profile.py
-
-A daily workflow rewrites the quote and the activity numbers.
-The portrait is assets/portrait.png. Replace that file and rebuild when you have a clearer one.
+Pushing a change in content/ redraws the pictures on GitHub.
+The picture address changes with the words, so the page does not keep the old drawing.
 -->
 
 <p align="center">
@@ -53,10 +51,10 @@ The portrait is assets/portrait.png. Replace that file and rebuild when you have
 <table>
 <tr>
 <td width="58%" valign="top">
-<img src="assets/profile/activity.svg" alt="activity" width="100%">
+<img src="assets/profile/activity.svg?v=7fde6a90" alt="activity" width="100%">
 </td>
 <td width="42%" valign="top">
-<img src="assets/profile/quote.svg" alt="A quote that changes every day" width="100%">
+<img src="assets/profile/quote.svg?v=3d610ae7" alt="A quote that changes every day" width="100%">
 </td>
 </tr>
 </table>

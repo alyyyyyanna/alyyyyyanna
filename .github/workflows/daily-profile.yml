@@ -1,6 +1,13 @@
-name: Daily quote and activity
+name: Redraw profile pictures
 
 on:
+  push:
+    branches: [main]
+    paths:
+      - "content/**"
+      - "assets/stacks/**"
+      - "assets/portrait.png"
+      - "lab/**"
   schedule:
     # 16:05 UTC is 00:05 at UTC+8, so the quote turns over on your local day.
     - cron: "5 16 * * *"
@@ -18,11 +25,17 @@ jobs:
         with:
           python-version: "3.12"
       - run: pip install fonttools
-      - run: python lab/update_daily.py
-      - name: Commit the day
+      - name: Redraw from the content files
+        run: |
+          if [ "${{ github.event_name }}" = "schedule" ]; then
+            python lab/update_daily.py
+          else
+            python lab/build_profile.py
+          fi
+      - name: Commit the drawing
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add assets/profile/activity.svg assets/profile/quote.svg content/stats.json
-          git diff --staged --quiet || git commit -m "Rotate the daily quote and refresh activity numbers"
+          git add assets/profile README.md preview.html content/stats.json
+          git diff --staged --quiet || git commit -m "Redraw the profile pictures"
           git push
