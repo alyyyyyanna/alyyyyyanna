@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="472 864 176 190" role="img" aria-labelledby="assetTitle assetDesc">
+  <title id="assetTitle">The sprout world</title>
+  <desc id="assetDesc">A tiny rocky world with a gently swaying green sprout.</desc>
+
+  <defs>
+    <radialGradient id="space" cx="50%" cy="42%" r="85%">
+      <stop offset="0%" stop-color="#2a2142"/><stop offset="45%" stop-color="#151029"/><stop offset="100%" stop-color="#0d1117"/>
+    </radialGradient>
+    <radialGradient id="cloudPink" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#e7b4c4" stop-opacity="0.30"/><stop offset="100%" stop-color="#e7b4c4" stop-opacity="0"/></radialGradient>
+    <radialGradient id="cloudViolet" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#7d6bb8" stop-opacity="0.42"/><stop offset="100%" stop-color="#7d6bb8" stop-opacity="0"/></radialGradient>
+    <radialGradient id="cloudBlue" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#5b7fd0" stop-opacity="0.28"/><stop offset="100%" stop-color="#5b7fd0" stop-opacity="0"/></radialGradient>
+    <radialGradient id="glow" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#fff1c2" stop-opacity="0.55"/><stop offset="100%" stop-color="#fff1c2" stop-opacity="0"/></radialGradient>
+    <radialGradient id="lampglow" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#ffd978" stop-opacity="0.85"/><stop offset="45%" stop-color="#ffb94a" stop-opacity="0.28"/><stop offset="100%" stop-color="#ffb94a" stop-opacity="0"/></radialGradient>
+    <radialGradient id="rock" cx="32%" cy="26%" r="80%"><stop offset="0%" stop-color="#e6cfa8"/><stop offset="45%" stop-color="#a47f5d"/><stop offset="100%" stop-color="#4a3226"/></radialGradient>
+    <linearGradient id="shade" x1="0.15" y1="0.05" x2="0.9" y2="1"><stop offset="0.35" stop-color="#140c1c" stop-opacity="0"/><stop offset="1" stop-color="#140c1c" stop-opacity="0.6"/></linearGradient>
+    <radialGradient id="sea" cx="34%" cy="30%" r="78%"><stop offset="0%" stop-color="#bfe9ff"/><stop offset="40%" stop-color="#2f7fb0"/><stop offset="100%" stop-color="#102a4a"/></radialGradient>
+    <radialGradient id="atmo" cx="50%" cy="50%" r="50%"><stop offset="80%" stop-color="#7cc4ff" stop-opacity="0"/><stop offset="93%" stop-color="#7cc4ff" stop-opacity="0.35"/><stop offset="100%" stop-color="#7cc4ff" stop-opacity="0"/></radialGradient>
+    <linearGradient id="mtn" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#9a8a8a"/><stop offset="1" stop-color="#4d4048"/></linearGradient>
+    <linearGradient id="wood" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#c4895a"/><stop offset="1" stop-color="#7a4a30"/></linearGradient>
+    <linearGradient id="glass" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#e6f3ff" stop-opacity="0.18"/><stop offset="1" stop-color="#e6f3ff" stop-opacity="0.03"/></linearGradient>
+
+    <!-- edge fades: white = visible, black = transparent -->
+    <linearGradient id="gx" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#000"/><stop offset="0.02" stop-color="#2a2a2a"/><stop offset="0.045" stop-color="#8c8c8c"/><stop offset="0.08" stop-color="#fff"/>
+      <stop offset="0.92" stop-color="#fff"/><stop offset="0.955" stop-color="#8c8c8c"/><stop offset="0.98" stop-color="#2a2a2a"/><stop offset="1" stop-color="#000"/>
+    </linearGradient>
+    <linearGradient id="gy" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#000"/><stop offset="0.012" stop-color="#2a2a2a"/><stop offset="0.028" stop-color="#8c8c8c"/><stop offset="0.05" stop-color="#fff"/>
+      <stop offset="0.95" stop-color="#fff"/><stop offset="0.972" stop-color="#8c8c8c"/><stop offset="0.988" stop-color="#2a2a2a"/><stop offset="1" stop-color="#000"/>
+    </linearGradient>
+    <mask id="mx" maskUnits="userSpaceOnUse" x="0" y="0" width="760" height="1520"><rect width="760" height="1520" fill="url(#gx)"/></mask>
+    <mask id="my" maskUnits="userSpaceOnUse" x="0" y="0" width="760" height="1520"><rect width="760" height="1520" fill="url(#gy)"/></mask>
+
+    <filter id="haze" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="26"/></filter>
+    <filter id="rough" x="-15%" y="-15%" width="130%" height="130%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.05" numOctaves="3" seed="4" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="4" xChannelSelector="R" yChannelSelector="G" result="d"/>
+      <feTurbulence type="fractalNoise" baseFrequency="0.75" numOctaves="2" seed="9" result="g"/>
+      <feColorMatrix in="g" type="matrix" values="0 0 0 0 .1  0 0 0 0 .06  0 0 0 0 .06  1.3 0 0 0 -.5" result="ga"/>
+      <feComposite in="ga" in2="d" operator="in" result="gg"/>
+      <feMerge><feMergeNode in="d"/><feMergeNode in="gg"/></feMerge>
+    </filter>
+
+    <path id="blob" transform="translate(-10 -7)" d="M-34 8c2-28 22-46 48-42 20 3 36 16 40 36 4 22-8 40-28 46-24 8-52 2-60-18-6-14-4-16 0-22z"/>
+    <g id="body" filter="url(#rough)">
+      <use href="#blob" fill="url(#rock)" stroke="#2b1d22" stroke-width="1.3" stroke-linejoin="round"/>
+      <ellipse cx="-14" cy="-8" rx="9" ry="5.5" fill="#5b4333" opacity="0.5"/>
+      <path d="M-22 -5a9 5.5 0 0 0 17 3" fill="none" stroke="#f0dcb8" stroke-width="1.1" opacity="0.5"/>
+      <ellipse cx="16" cy="18" rx="11" ry="6.5" fill="#4a3426" opacity="0.45"/>
+      <path d="M6 21a11 6.5 0 0 0 20-2" fill="none" stroke="#f0dcb8" stroke-width="1.1" opacity="0.4"/>
+      <ellipse cx="-22" cy="22" rx="5" ry="3" fill="#5b4333" opacity="0.45"/>
+      <ellipse cx="22" cy="-18" rx="4" ry="2.6" fill="#5b4333" opacity="0.4"/>
+      <use href="#blob" fill="url(#shade)"/>
+    </g>
+  </defs>
+
+  <rect x="472" y="864" width="176" height="190" rx="18" fill="url(#space)"/>
+  <ellipse cx="521.28" cy="911.5" rx="73.92" ry="38.0" fill="url(#cloudViolet)"/>
+  <ellipse cx="609.28" cy="1000.8" rx="79.2" ry="38.0" fill="url(#cloudPink)"/>
+  
+    <g transform="translate(560 980)">
+      <use href="#body" transform="scale(.9)"/>
+      <g><animateTransform attributeName="transform" type="rotate" values="-3 0 -34;3 0 -34;-3 0 -34" dur="5s" repeatCount="indefinite"/>
+        <path d="M0 -33C1 -46 -1 -58 0 -72" fill="none" stroke="#3f6b52" stroke-width="3" stroke-linecap="round"/>
+        <path d="M0 -62C-14 -78 -30 -74 -32 -58C-18 -56 -6 -56 0 -62Z" fill="#6fae78" stroke="#1f3a2c" stroke-width="1.2" stroke-linejoin="round"/>
+        <path d="M0 -70C14 -88 32 -82 32 -66C18 -64 6 -64 0 -70Z" fill="#8fd08f" stroke="#1f3a2c" stroke-width="1.2" stroke-linejoin="round"/>
+        <path d="M-4 -62C-14 -68 -22 -68 -26 -62M4 -70C14 -76 22 -76 26 -72" fill="none" stroke="#2f5a42" stroke-width="1"/>
+      </g>
+    </g>
+</svg>

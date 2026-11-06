@@ -1,9 +1,10 @@
-"""Build the portrait galaxy.
+"""Build the portrait galaxy and its standalone portfolio assets.
 
 Python draws one tall SVG in a painted, storybook style. Motion lives in the
 SVG itself: drifting dust, a turning ring, an orbiting moon, a glowing lamp,
 swaying sprout, floating pages, and petals that fall. A still copy is built too.
 The edges fade to transparent so the picture melts into GitHub's dark page.
+Each world is also exported as an independent SVG for flexible layouts.
 """
 
 from pathlib import Path
@@ -377,32 +378,188 @@ def build(still: bool) -> str:
 """
 
 
+def standalone(
+    title: str,
+    description: str,
+    view_box: tuple[int, int, int, int],
+    content: str,
+) -> str:
+    """Wrap one scene element in its own self-contained SVG card."""
+    x, y, width, height = view_box
+    return f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="{x} {y} {width} {height}" role="img" aria-labelledby="assetTitle assetDesc">
+  <title id="assetTitle">{title}</title>
+  <desc id="assetDesc">{description}</desc>
+{DEFS}
+  <rect x="{x}" y="{y}" width="{width}" height="{height}" rx="18" fill="url(#space)"/>
+  <ellipse cx="{x + width * 0.28}" cy="{y + height * 0.25}" rx="{width * 0.42}" ry="{height * 0.2}" fill="url(#cloudViolet)"/>
+  <ellipse cx="{x + width * 0.78}" cy="{y + height * 0.72}" rx="{width * 0.45}" ry="{height * 0.2}" fill="url(#cloudPink)"/>
+  {content}
+</svg>
+"""
+
+
+def write_individual_assets(assets: Path) -> None:
+    """Export the scene's missing worlds as reusable animated SVG files."""
+    specs = (
+        (
+            "ring-world",
+            "The ringed world",
+            "A tiny rocky world with a turning ring, an orbiting moon, and a small hat.",
+            (58, 48, 224, 224),
+            lambda still: ring_world(still) + moon(still),
+        ),
+        (
+            "lantern-world",
+            "The lantern world",
+            "A tiny rocky world carrying a softly glowing lantern.",
+            (462, 174, 196, 196),
+            lantern,
+        ),
+        (
+            "books-world",
+            "The books world",
+            "A tiny rocky world with a stack of books, a globe, and an open map.",
+            (458, 550, 204, 196),
+            lambda _still: books(),
+        ),
+        (
+            "sprout-world",
+            "The sprout world",
+            "A tiny rocky world with a gently swaying green sprout.",
+            (472, 864, 176, 190),
+            sprout,
+        ),
+    )
+
+    for filename, title, description, view_box, render in specs:
+        (assets / f"{filename}.svg").write_text(
+            standalone(title, description, view_box, render(False)),
+            encoding="utf-8",
+        )
+        (assets / f"{filename}-still.svg").write_text(
+            standalone(title, description, view_box, render(True)),
+            encoding="utf-8",
+        )
+
+
+PREVIEW_HTML = """<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Worlds in the portrait sky</title>
+  <style>
+    :root { color-scheme: dark; font-family: Palatino, Georgia, serif; }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: #f3e6d4;
+      background:
+        radial-gradient(circle at 50% 0%, #2a2142 0, #151029 34rem, #090712 72rem);
+    }
+    main { width: min(1040px, calc(100% - 32px)); margin: 0 auto; padding: 72px 0 96px; }
+    header { max-width: 680px; margin-bottom: 42px; }
+    .eyebrow { color: #e7b4c4; font-size: 0.78rem; letter-spacing: 0.18em; text-transform: uppercase; }
+    h1 { margin: 10px 0 14px; font-size: clamp(2.6rem, 8vw, 5.8rem); font-weight: 400; line-height: 0.94; }
+    header p { max-width: 58ch; color: #cdbfd2; font-size: 1.06rem; line-height: 1.7; }
+    .gallery { display: grid; grid-template-columns: repeat(12, 1fr); gap: 18px; }
+    figure {
+      grid-column: span 4;
+      margin: 0;
+      overflow: hidden;
+      border: 1px solid rgba(231, 180, 196, 0.16);
+      border-radius: 22px;
+      background: rgba(20, 16, 40, 0.72);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+    }
+    figure.wide { grid-column: span 8; }
+    figure img { display: block; width: 100%; aspect-ratio: 1.15; object-fit: cover; }
+    figure.wide img { aspect-ratio: 2.2; }
+    figcaption { padding: 15px 17px 18px; color: #d9ccdc; }
+    figcaption strong { display: block; margin-bottom: 5px; color: #fff6d8; font-weight: 400; font-size: 1.08rem; }
+    figcaption span { color: #998da2; font-size: 0.83rem; }
+    details { margin-top: 34px; color: #a99cad; }
+    summary { cursor: pointer; width: fit-content; }
+    details img { display: block; width: min(460px, 100%); margin: 20px auto 0; }
+    @media (max-width: 760px) {
+      main { padding-top: 48px; }
+      figure, figure.wide { grid-column: span 6; }
+      figure.wide img { aspect-ratio: 1.35; }
+    }
+    @media (max-width: 500px) {
+      figure, figure.wide { grid-column: 1 / -1; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <div class="eyebrow">A portfolio in orbit</div>
+      <h1>Worlds from one sky</h1>
+      <p>Each illustration now lives as its own reusable asset—small worlds that can move, change, and find their own place without being locked into one scene.</p>
+    </header>
+    <section class="gallery" aria-label="Individual portfolio illustrations">
+      <figure class="wide">
+        <picture><source media="(prefers-reduced-motion: reduce)" srcset="assets/sky-still.svg"><img src="assets/sky.svg" alt="A painted galaxy filled with labeled stars."></picture>
+        <figcaption><strong>Constellation</strong><span>Tools, skills, and discoveries</span></figcaption>
+      </figure>
+      <figure>
+        <picture><source media="(prefers-reduced-motion: reduce)" srcset="assets/ring-world-still.svg"><img src="assets/ring-world.svg" alt="A tiny ringed world with an orbiting moon."></picture>
+        <figcaption><strong>The ringed world</strong><span>Still unnamed</span></figcaption>
+      </figure>
+      <figure>
+        <picture><source media="(prefers-reduced-motion: reduce)" srcset="assets/lantern-world-still.svg"><img src="assets/lantern-world.svg" alt="A rocky world carrying a glowing lantern."></picture>
+        <figcaption><strong>The lantern world</strong><span>Still unnamed</span></figcaption>
+      </figure>
+      <figure>
+        <img src="assets/planet-peak.svg" alt="A small rocky world with a snowy mountain.">
+        <figcaption><strong>Peak Hunter</strong><span>Private project</span></figcaption>
+      </figure>
+      <figure>
+        <picture><source media="(prefers-reduced-motion: reduce)" srcset="assets/books-world-still.svg"><img src="assets/books-world.svg" alt="A rocky world with books, a globe, and an open map."></picture>
+        <figcaption><strong>The books world</strong><span>Still unnamed</span></figcaption>
+      </figure>
+      <figure>
+        <img src="assets/planet-route.svg" alt="A blue world circled by a route of warm lights.">
+        <figcaption><strong>Jeepney Router</strong><span>Private project</span></figcaption>
+      </figure>
+      <figure>
+        <picture><source media="(prefers-reduced-motion: reduce)" srcset="assets/sprout-world-still.svg"><img src="assets/sprout-world.svg" alt="A rocky world with a gently swaying sprout."></picture>
+        <figcaption><strong>The sprout world</strong><span>Still unnamed</span></figcaption>
+      </figure>
+      <figure>
+        <img src="assets/rose.svg" alt="A rose growing from a tiny asteroid.">
+        <figcaption><strong>The rose</strong><span>What is cared for</span></figcaption>
+      </figure>
+      <figure>
+        <img src="assets/drawer.svg" alt="A tiny world with an open wooden drawer.">
+        <figcaption><strong>The drawer</strong><span>A note waiting to be found</span></figcaption>
+      </figure>
+      <figure class="wide">
+        <img src="assets/path.svg" alt="A trail of warm stars crossing the galaxy.">
+        <figcaption><strong>The path</strong><span>What comes next</span></figcaption>
+      </figure>
+    </section>
+    <details>
+      <summary>View the original composed scene</summary>
+      <picture><source media="(prefers-reduced-motion: reduce)" srcset="assets/scene-still.svg"><img src="assets/scene.svg" alt="The original tall portrait galaxy combining all the worlds."></picture>
+    </details>
+  </main>
+</body>
+</html>
+"""
+
+
 def main():
     root = Path(__file__).resolve().parents[1]
     assets = root / "assets"
     assets.mkdir(exist_ok=True)
     (assets / "scene.svg").write_text(build(False), encoding="utf-8")
     (assets / "scene-still.svg").write_text(build(True), encoding="utf-8")
+    write_individual_assets(assets)
     preview = root / "preview.html"
-    preview.write_text(
-        """<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <title>Portrait sky</title>
-  <style>
-    html, body { margin: 0; background: #0d1117; }
-    body { display: flex; justify-content: center; }
-    object { width: min(460px, 100vw); height: auto; }
-  </style>
-</head>
-<body>
-  <object data="assets/scene.svg" type="image/svg+xml" width="460" aria-label="Portrait galaxy with moving stardust, a turning ring, an orbiting moon, a glowing lantern, a swaying sprout, floating pages, and falling petals."></object>
-</body>
-</html>
-""",
-        encoding="utf-8",
-    )
+    preview.write_text(PREVIEW_HTML, encoding="utf-8")
 
 
 if __name__ == "__main__":
