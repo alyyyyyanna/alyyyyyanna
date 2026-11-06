@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+preview_root="${TMPDIR:-/tmp}/figma-make-static-${UID}"
+rm -rf "$preview_root"
+mkdir -p "$preview_root"
+ln -s "$PWD/preview.html" "$preview_root/index.html"
+ln -s "$PWD/assets" "$preview_root/assets"
+
+exec python3 -m http.server "$PORT" --bind 0.0.0.0 --directory "$preview_root"
