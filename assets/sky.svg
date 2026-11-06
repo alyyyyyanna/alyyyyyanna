@@ -39,24 +39,24 @@
     <path d="M690 300 l1.3 4.6 4.8.2-3.8 3 1.3 4.6-3.8-2.8-3.8 2.8 1.3-4.6-3.8-3 4.8-.2z"/>
   </g>
   <g fill="#fff4c2" stroke="#fff4c2" stroke-linejoin="round">
-    <path transform="translate(118 78)" d="M0-16 3.2-4.6 15-4.2 5.4 2.4 8.8 14 0 6.6-8.8 14-5.4 2.4-15-4.2-3.2-4.6Z"/>
-    <path transform="translate(604 64)" d="M0-16 3.2-4.6 15-4.2 5.4 2.4 8.8 14 0 6.6-8.8 14-5.4 2.4-15-4.2-3.2-4.6Z"/>
-    <path transform="translate(214 188)" d="M0-18 3.6-5.2 17-4.8 6 2.6 10 16 0 7.4-10 16-6 2.6-17-4.8-3.6-5.2Z"/>
-    <path transform="translate(390 128)" d="M0-12 2.4-3.4 11-3.2 4 1.8 6.4 10.4 0 5-6.4 10.4-4 1.8-11-3.2-2.4-3.4Z"/>
-    <path transform="translate(548 214)" d="M0-16 3.2-4.6 15-4.2 5.4 2.4 8.8 14 0 6.6-8.8 14-5.4 2.4-15-4.2-3.2-4.6Z"/>
-    <path transform="translate(96 312)" d="M0-12 2.4-3.4 11-3.2 4 1.8 6.4 10.4 0 5-6.4 10.4-4 1.8-11-3.2-2.4-3.4Z"/>
-    <path transform="translate(336 300)" d="M0-18 3.6-5.2 17-4.8 6 2.6 10 16 0 7.4-10 16-6 2.6-17-4.8-3.6-5.2Z"/>
-    <path transform="translate(640 328)" d="M0-12 2.4-3.4 11-3.2 4 1.8 6.4 10.4 0 5-6.4 10.4-4 1.8-11-3.2-2.4-3.4Z"/>
+    <path transform="translate(118 72)" d="M0-16 3.2-4.6 15-4.2 5.4 2.4 8.8 14 0 6.6-8.8 14-5.4 2.4-15-4.2-3.2-4.6Z"/>
+    <path transform="translate(292 118)" d="M0-16 3.2-4.6 15-4.2 5.4 2.4 8.8 14 0 6.6-8.8 14-5.4 2.4-15-4.2-3.2-4.6Z"/>
+    <path transform="translate(470 64)" d="M0-14 2.8-4 13-3.6 4.6 2 7.6 12.2 0 5.8-7.6 12.2-4.6 2-13-3.6-2.8-4Z"/>
+    <path transform="translate(620 128)" d="M0-15 3-4.3 14-4 5 2.2 8.2 13 0 6.2-8.2 13-5 2.2-14-4-3-4.3Z"/>
+    <path transform="translate(150 236)" d="M0-15 3-4.3 14-4 5 2.2 8.2 13 0 6.2-8.2 13-5 2.2-14-4-3-4.3Z"/>
+    <path transform="translate(330 268)" d="M0-16 3.2-4.6 15-4.2 5.4 2.4 8.8 14 0 6.6-8.8 14-5.4 2.4-15-4.2-3.2-4.6Z"/>
+    <path transform="translate(500 214)" d="M0-16 3.2-4.6 15-4.2 5.4 2.4 8.8 14 0 6.6-8.8 14-5.4 2.4-15-4.2-3.2-4.6Z"/>
+    <path transform="translate(650 276)" d="M0-13 2.6-3.7 12-3.4 4.2 1.8 6.8 11.2 0 5.4-6.8 11.2-4.2 1.8-12-3.4-2.6-3.7Z"/>
   </g>
   <g fill="#f3e6d4" font-family="Palatino, Georgia, serif" font-size="15" text-anchor="middle">
-    <text x="118" y="112">[tool]</text>
-    <text x="604" y="98">[certificate]</text>
-    <text x="214" y="226">[language]</text>
-    <text x="390" y="156">[surprise]</text>
-    <text x="548" y="248">[skill]</text>
-    <text x="96" y="340">[framework]</text>
-    <text x="336" y="338">[language]</text>
-    <text x="640" y="356">[tool]</text>
+    <text x="118" y="106">[tool]</text>
+    <text x="292" y="154">[language]</text>
+    <text x="470" y="96">[surprise]</text>
+    <text x="620" y="164">[certificate]</text>
+    <text x="150" y="270">[skill]</text>
+    <text x="330" y="304">[framework]</text>
+    <text x="500" y="250">[language]</text>
+    <text x="650" y="308">[tool]</text>
   </g>
   </g>
 </svg>

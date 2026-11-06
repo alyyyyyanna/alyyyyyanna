@@ -12,90 +12,292 @@
       min-height: 100vh;
       color: #f3e6d4;
       background:
-        radial-gradient(circle at 50% 0%, #2a2142 0, #151029 34rem, #090712 72rem);
+        radial-gradient(circle at 18% 0%, #2a2142 0, transparent 28rem),
+        radial-gradient(circle at 90% 12%, rgba(125, 107, 184, 0.28), transparent 22rem),
+        radial-gradient(circle at 50% 0%, #151029 0, #090712 46rem);
     }
-    main { width: min(1040px, calc(100% - 32px)); margin: 0 auto; padding: 72px 0 96px; }
-    header { max-width: 680px; margin-bottom: 42px; }
+    main { width: min(1080px, calc(100% - 32px)); margin: 0 auto; padding: 56px 0 96px; }
+    header { position: relative; margin-bottom: 42px; padding-right: min(240px, 28vw); }
     .eyebrow { color: #e7b4c4; font-size: 0.78rem; letter-spacing: 0.18em; text-transform: uppercase; }
-    h1 { margin: 10px 0 14px; font-size: clamp(2.6rem, 8vw, 5.8rem); font-weight: 400; line-height: 0.94; }
-    header p { max-width: 58ch; color: #cdbfd2; font-size: 1.06rem; line-height: 1.7; }
-    .gallery { display: grid; grid-template-columns: repeat(12, 1fr); gap: 18px; }
-    figure {
-      grid-column: span 4;
+    h1 { margin: 10px 0 14px; max-width: 12ch; font-size: clamp(2.7rem, 7vw, 5.2rem); font-weight: 400; line-height: 0.94; }
+    header p { max-width: 46ch; margin: 0; color: #cdbfd2; font-size: 1.05rem; line-height: 1.65; }
+    .sigil { position: absolute; top: 0; right: 0; width: min(230px, 30vw); }
+    .sigil svg { display: block; width: 100%; height: auto; }
+    h2 {
+      margin: 34px 0 14px;
+      color: #e7b4c4;
+      font-size: 0.78rem;
+      font-weight: 400;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .card {
+      display: grid;
+      grid-template-columns: 132px minmax(0, 1fr);
+      grid-template-rows: minmax(120px, auto) auto;
       margin: 0;
       overflow: hidden;
-      border: 1px solid rgba(231, 180, 196, 0.16);
-      border-radius: 22px;
-      background: rgba(20, 16, 40, 0.72);
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+      border: 1px solid rgba(240, 215, 162, 0.2);
+      border-radius: 18px;
+      background: linear-gradient(180deg, rgba(32, 24, 58, 0.94), rgba(10, 8, 20, 0.94));
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.22);
     }
-    figure.wide { grid-column: span 8; }
-    figure img { display: block; width: 100%; aspect-ratio: 1.15; object-fit: cover; }
-    figure.wide img { aspect-ratio: 2.2; }
-    figcaption { padding: 15px 17px 18px; color: #d9ccdc; }
-    figcaption strong { display: block; margin-bottom: 5px; color: #fff6d8; font-weight: 400; font-size: 1.08rem; }
-    figcaption span { color: #998da2; font-size: 0.83rem; }
-    details { margin-top: 34px; color: #a99cad; }
+    .card.flip { grid-template-columns: minmax(0, 1fr) 132px; }
+    .card.wide { grid-column: 1 / -1; grid-template-columns: minmax(220px, 1.15fr) minmax(0, 1fr); }
+    .art {
+      grid-column: 1;
+      grid-row: 1;
+      min-width: 0;
+      display: grid;
+      place-items: center;
+      padding: 12px;
+      background:
+        radial-gradient(circle at 50% 42%, rgba(125, 107, 184, 0.35), transparent 70%),
+        #120e22;
+    }
+    .copy {
+      grid-column: 2;
+      grid-row: 1;
+      min-width: 0;
+      padding: 14px 16px 8px;
+    }
+    .card.flip .art { grid-column: 2; }
+    .card.flip .copy { grid-column: 1; }
+    .card.wide .art { min-height: 0; padding: 0; }
+    .art img { width: 92px; height: 92px; max-width: 100%; object-fit: contain; }
+    .card.wide .art img { width: 100%; height: auto; max-height: 260px; object-fit: contain; }
+    .name { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; }
+    .name strong { color: #fff6d8; font-weight: 400; font-size: 1.12rem; }
+    .badge {
+      flex: none;
+      padding: 2px 8px;
+      border: 1px solid rgba(231, 180, 196, 0.45);
+      border-radius: 999px;
+      color: #e7b4c4;
+      font-size: 0.68rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+    .line { margin: 8px 0 0; color: #d9ccdc; font-size: 0.98rem; line-height: 1.45; }
+    .more { margin: 8px 0 0; color: #998da2; font-size: 0.86rem; line-height: 1.45; }
+    .chips {
+      grid-column: 1 / -1;
+      grid-row: 2;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 12px;
+      margin: 0;
+      padding: 8px 14px 10px;
+      list-style: none;
+      background: #16103a;
+      border-top: 1px solid rgba(125, 107, 184, 0.45);
+      color: #f0d7a2;
+      font-family: "Segoe UI", sans-serif;
+      font-size: 0.78rem;
+    }
+    .chips li::before { content: "✰ "; color: #fff6d8; }
+    details { margin-top: 36px; color: #a99cad; }
     summary { cursor: pointer; width: fit-content; }
     details img { display: block; width: min(460px, 100%); margin: 20px auto 0; }
-    @media (max-width: 760px) {
-      main { padding-top: 48px; }
-      figure, figure.wide { grid-column: span 6; }
-      figure.wide img { aspect-ratio: 1.35; }
-    }
-    @media (max-width: 500px) {
-      figure, figure.wide { grid-column: 1 / -1; }
+    @media (max-width: 800px) {
+      header { padding-right: 0; }
+      .sigil { position: static; width: 200px; margin: 18px 0 0 auto; }
+      .grid { grid-template-columns: 1fr; }
+      .card.wide { grid-column: auto; grid-template-columns: 1fr; }
+      .card.wide .art, .card.wide .copy { grid-row: auto; }
     }
   </style>
 </head>
 <body>
   <main>
     <header>
-      <div class="eyebrow">A portfolio in orbit</div>
-      <h1>Worlds from one sky</h1>
-      <p>Each illustration now lives as its own reusable asset—small worlds that can move, change, and find their own place without being locked into one scene.</p>
+      <div class="eyebrow">✰ /sky</div>
+      <h1>Worlds from one sky.</h1>
+      <p>[One or two sentences you write. The visitor has just landed.]</p>
+      <div class="sigil" aria-hidden="true">
+        <svg viewBox="0 0 230 110">
+          <path d="M4 86 H70" fill="none" stroke="#7d6bb8" stroke-width="2" stroke-dasharray="1.5 7" stroke-linecap="round"/>
+          <rect x="66" y="80" width="11" height="11" rx="2" fill="#c4b6f0"/>
+          <path d="M82 86 H124" fill="none" stroke="#7d6bb8" stroke-width="2" stroke-dasharray="1.5 7" stroke-linecap="round"/>
+          <rect x="120" y="81" width="8" height="8" rx="1.5" fill="#f0d7a2"/>
+          <path d="M132 84 C158 84 150 40 168 30" fill="none" stroke="#7d6bb8" stroke-width="2" stroke-dasharray="1.5 7" stroke-linecap="round"/>
+          <rect x="160" y="2" width="62" height="62" rx="16" fill="#241c44" stroke="#7d6bb8" stroke-width="2"/>
+          <ellipse cx="191" cy="33" rx="15" ry="15" fill="none" stroke="#f0d7a2" stroke-width="1.5"/>
+          <ellipse cx="191" cy="33" rx="25" ry="8" fill="none" stroke="#e7b4c4" stroke-width="1.4" transform="rotate(-18 191 33)"/>
+          <circle cx="208" cy="27" r="2.2" fill="#fff6d8"/>
+        </svg>
+      </div>
     </header>
-    <section class="gallery" aria-label="Individual portfolio illustrations">
-      <figure class="wide">
-        <picture><source media="(prefers-reduced-motion: reduce)" srcset="assets/sky-still.svg"><img src="assets/sky.svg" alt="A painted galaxy filled with labeled stars."></picture>
-        <figcaption><strong>Constellation</strong><span>Tools, skills, and discoveries</span></figcaption>
-      </figure>
-      <figure>
-        <picture><source media="(prefers-reduced-motion: reduce)" srcset="assets/ring-world-still.svg"><img src="assets/ring-world.svg" alt="A tiny ringed world with an orbiting moon."></picture>
-        <figcaption><strong>The ringed world</strong><span>Still unnamed</span></figcaption>
-      </figure>
-      <figure>
-        <picture><source media="(prefers-reduced-motion: reduce)" srcset="assets/lantern-world-still.svg"><img src="assets/lantern-world.svg" alt="A rocky world carrying a glowing lantern."></picture>
-        <figcaption><strong>The lantern world</strong><span>Still unnamed</span></figcaption>
-      </figure>
-      <figure>
-        <img src="assets/planet-peak.svg" alt="A small rocky world with a snowy mountain.">
-        <figcaption><strong>Peak Hunter</strong><span>Private project</span></figcaption>
-      </figure>
-      <figure>
-        <picture><source media="(prefers-reduced-motion: reduce)" srcset="assets/books-world-still.svg"><img src="assets/books-world.svg" alt="A rocky world with books, a globe, and an open map."></picture>
-        <figcaption><strong>The books world</strong><span>Still unnamed</span></figcaption>
-      </figure>
-      <figure>
-        <img src="assets/planet-route.svg" alt="A blue world circled by a route of warm lights.">
-        <figcaption><strong>Jeepney Router</strong><span>Private project</span></figcaption>
-      </figure>
-      <figure>
-        <picture><source media="(prefers-reduced-motion: reduce)" srcset="assets/sprout-world-still.svg"><img src="assets/sprout-world.svg" alt="A rocky world with a gently swaying sprout."></picture>
-        <figcaption><strong>The sprout world</strong><span>Still unnamed</span></figcaption>
-      </figure>
-      <figure>
-        <img src="assets/rose.svg" alt="A rose growing from a tiny asteroid.">
-        <figcaption><strong>The rose</strong><span>What is cared for</span></figcaption>
-      </figure>
-      <figure>
-        <img src="assets/drawer.svg" alt="A tiny world with an open wooden drawer.">
-        <figcaption><strong>The drawer</strong><span>A note waiting to be found</span></figcaption>
-      </figure>
-      <figure class="wide">
-        <img src="assets/path.svg" alt="A trail of warm stars crossing the galaxy.">
-        <figcaption><strong>The path</strong><span>What comes next</span></figcaption>
-      </figure>
+
+    <section aria-label="Planets">
+      <h2>Planets</h2>
+      <div class="grid">
+        <article class="card">
+          <div class="art"><picture><source media="(prefers-reduced-motion: reduce)" srcset="assets/ring-world-still.svg"><img src="assets/ring-world.svg" alt="A tiny ringed world with an orbiting moon."></picture></div>
+          <div class="copy">
+            <div class="name"><strong>The ringed world</strong></div>
+            <p class="line">[A future project. Your sentences, when you have them.]</p>
+            <p class="more">[More about this world, if you want it.]</p>
+          </div>
+          <ul class="chips"><li>[tag]</li><li>[tag]</li><li>[tag]</li></ul>
+        </article>
+        <article class="card flip">
+          <div class="art"><picture><source media="(prefers-reduced-motion: reduce)" srcset="assets/lantern-world-still.svg"><img src="assets/lantern-world.svg" alt="A rocky world carrying a glowing lantern."></picture></div>
+          <div class="copy">
+            <div class="name"><strong>The lantern world</strong></div>
+            <p class="line">[A future project. Your sentences, when you have them.]</p>
+            <p class="more">[More about this world, if you want it.]</p>
+          </div>
+          <ul class="chips"><li>[tag]</li><li>[tag]</li><li>[tag]</li></ul>
+        </article>
+        <article class="card">
+          <div class="art"><img src="assets/planet-peak.svg" alt="A small rocky world with a snowy mountain."></div>
+          <div class="copy">
+            <div class="name"><strong>Peak Hunter</strong><span class="badge">private</span></div>
+            <p class="line">[A short description, in your words.]</p>
+            <p class="more">Still exploring. No public link yet.</p>
+          </div>
+          <ul class="chips"><li>[tag]</li><li>[tag]</li><li>[tag]</li></ul>
+        </article>
+        <article class="card">
+          <div class="art"><picture><source media="(prefers-reduced-motion: reduce)" srcset="assets/books-world-still.svg"><img src="assets/books-world.svg" alt="A rocky world with books, a globe, and an open map."></picture></div>
+          <div class="copy">
+            <div class="name"><strong>The books world</strong></div>
+            <p class="line">[A future project. Your sentences, when you have them.]</p>
+            <p class="more">[More about this world, if you want it.]</p>
+          </div>
+          <ul class="chips"><li>[tag]</li><li>[tag]</li><li>[tag]</li></ul>
+        </article>
+        <article class="card">
+          <div class="art"><img src="assets/planet-route.svg" alt="A blue world circled by a route of warm lights."></div>
+          <div class="copy">
+            <div class="name"><strong>Jeepney Router</strong><span class="badge">private</span></div>
+            <p class="line">[A short description, in your words.]</p>
+            <p class="more">Still exploring. No public link yet.</p>
+          </div>
+          <ul class="chips"><li>[tag]</li><li>[tag]</li><li>[tag]</li></ul>
+        </article>
+        <article class="card">
+          <div class="art"><picture><source media="(prefers-reduced-motion: reduce)" srcset="assets/sprout-world-still.svg"><img src="assets/sprout-world.svg" alt="A rocky world with a gently swaying sprout."></picture></div>
+          <div class="copy">
+            <div class="name"><strong>The sprout world</strong></div>
+            <p class="line">[A future project. Your sentences, when you have them.]</p>
+            <p class="more">[More about this world, if you want it.]</p>
+          </div>
+          <ul class="chips"><li>[tag]</li><li>[tag]</li><li>[tag]</li></ul>
+        </article>
+      </div>
+    </section>
+
+    <section aria-label="Stars">
+      <h2>Stars</h2>
+      <div class="grid">
+        <article class="card wide">
+          <div class="art"><picture><source media="(prefers-reduced-motion: reduce)" srcset="assets/sky-still.svg"><img src="assets/sky.svg" alt="A painted galaxy filled with labeled stars."></picture></div>
+          <div class="copy">
+            <div class="name"><strong>Constellation</strong></div>
+            <p class="line">[What this field of stars is for, in your words.]</p>
+            <p class="more">Languages, tools, skills, certificates, and surprises, mixed together.</p>
+          </div>
+          <ul class="chips"><li>[tool]</li><li>[certificate]</li><li>[language]</li><li>[surprise]</li></ul>
+        </article>
+        <article class="card">
+          <div class="art"><img src="assets/marks/star.svg" alt=""></div>
+          <div class="copy">
+            <div class="name"><strong>[symbol]</strong><span class="badge">tool</span></div>
+            <p class="line">[What appears when it opens.]</p>
+          </div>
+          <ul class="chips"><li>[name]</li></ul>
+        </article>
+        <article class="card">
+          <div class="art"><img src="assets/marks/star.svg" alt=""></div>
+          <div class="copy">
+            <div class="name"><strong>[symbol]</strong><span class="badge">certificate</span></div>
+            <p class="line">[Issuer, year if you want it public, one sentence.]</p>
+          </div>
+          <ul class="chips"><li>[name]</li></ul>
+        </article>
+        <article class="card">
+          <div class="art"><img src="assets/marks/star.svg" alt=""></div>
+          <div class="copy">
+            <div class="name"><strong>[symbol]</strong><span class="badge">language</span></div>
+            <p class="line">[What appears when it opens.]</p>
+          </div>
+          <ul class="chips"><li>[name]</li></ul>
+        </article>
+        <article class="card">
+          <div class="art"><img src="assets/marks/star.svg" alt=""></div>
+          <div class="copy">
+            <div class="name"><strong>[symbol]</strong><span class="badge">surprise</span></div>
+            <p class="line">[A hidden note.]</p>
+          </div>
+          <ul class="chips"><li>[name]</li></ul>
+        </article>
+        <article class="card">
+          <div class="art"><img src="assets/marks/star.svg" alt=""></div>
+          <div class="copy">
+            <div class="name"><strong>[symbol]</strong><span class="badge">skill</span></div>
+            <p class="line">[What appears when it opens.]</p>
+          </div>
+          <ul class="chips"><li>[name]</li></ul>
+        </article>
+        <article class="card">
+          <div class="art"><img src="assets/marks/star.svg" alt=""></div>
+          <div class="copy">
+            <div class="name"><strong>[symbol]</strong><span class="badge">framework</span></div>
+            <p class="line">[What appears when it opens.]</p>
+          </div>
+          <ul class="chips"><li>[name]</li></ul>
+        </article>
+        <article class="card">
+          <div class="art"><img src="assets/marks/star.svg" alt=""></div>
+          <div class="copy">
+            <div class="name"><strong>[symbol]</strong><span class="badge">language</span></div>
+            <p class="line">[What appears when it opens.]</p>
+          </div>
+          <ul class="chips"><li>[name]</li></ul>
+        </article>
+        <article class="card">
+          <div class="art"><img src="assets/marks/star.svg" alt=""></div>
+          <div class="copy">
+            <div class="name"><strong>[symbol]</strong><span class="badge">tool</span></div>
+            <p class="line">[What appears when it opens.]</p>
+          </div>
+          <ul class="chips"><li>[name]</li></ul>
+        </article>
+      </div>
+    </section>
+
+    <section aria-label="Close to the asteroid">
+      <h2>Close to the asteroid</h2>
+      <div class="grid">
+        <article class="card">
+          <div class="art"><img src="assets/rose.svg" alt="A rose growing from a tiny asteroid."></div>
+          <div class="copy">
+            <div class="name"><strong>[What you care for]</strong></div>
+            <p class="line">[Your sentences. This sits apart from the planets.]</p>
+          </div>
+          <ul class="chips"><li>[tag]</li><li>[tag]</li></ul>
+        </article>
+        <article class="card">
+          <div class="art"><img src="assets/drawer.svg" alt="A tiny world with an open wooden drawer."></div>
+          <div class="copy">
+            <div class="name"><strong>[A quote, a joke, or a hidden note]</strong></div>
+            <p class="line">[Your words.]</p>
+          </div>
+          <ul class="chips"><li>[tag]</li></ul>
+        </article>
+        <article class="card wide">
+          <div class="art"><img src="assets/path.svg" alt="A trail of warm stars crossing the galaxy."></div>
+          <div class="copy">
+            <div class="name"><strong>[What you are learning]</strong></div>
+            <p class="line">[Your sentences.]</p>
+            <p class="more">[The next thing on the path.]</p>
+          </div>
+          <ul class="chips"><li>[tag]</li><li>[tag]</li><li>[tag]</li></ul>
+        </article>
+      </div>
     </section>
     <details>
       <summary>View the original composed scene</summary>
