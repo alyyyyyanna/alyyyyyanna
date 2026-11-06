@@ -1,5 +1,57 @@
 # One quote per line. Blank lines and lines starting with # are skipped.
 # The page shows one of these each day. Add as many as you want.
-quotes that change every day
-[a second quote you write]
-[a third quote you write]
+"It is only with the heart that one can see rightly; what is essential is invisible to the eye." — Antoine de Saint-Exupéry, The Little Prince
+"You become responsible, forever, for what you have tamed." — Antoine de Saint-Exupéry, The Little Prince
+"All grown-ups were once children... but only few of them remember it." — Antoine de Saint-Exupéry, The Little Prince
+"The most beautiful things in the world cannot be seen or touched, they are felt with the heart." — Antoine de Saint-Exupéry, The Little Prince
+"It is such a mysterious place, the land of tears." — Antoine de Saint-Exupéry, The Little Prince
+"What makes the desert beautiful is that somewhere it hides a well." — Antoine de Saint-Exupéry, The Little Prince
+"Words are the source of misunderstandings." — Antoine de Saint-Exupéry, The Little Prince
+"One runs the risk of weeping a little, if one lets oneself be tamed." — Antoine de Saint-Exupéry, The Little Prince
+"I am who I am and I have the need to be." — Antoine de Saint-Exupéry, The Little Prince
+"The stars are beautiful, because of a flower that cannot be seen." — Antoine de Saint-Exupéry, The Little Prince
+"The eyes are blind. One must look with the heart." — Antoine de Saint-Exupéry, The Little Prince
+"You are beautiful, but you are empty." — Antoine de Saint-Exupéry, The Little Prince
+"People have forgotten this truth." — Antoine de Saint-Exupéry, The Little Prince
+"It is the time you have wasted for your rose that makes your rose so important." — Antoine de Saint-Exupéry, The Little Prince
+"Men have no more time to understand anything." — Antoine de Saint-Exupéry, The Little Prince
+"I ought to have judged her by her acts and not by her words." — Antoine de Saint-Exupéry, The Little Prince
+"I was too young to know how to love her." — Antoine de Saint-Exupéry, The Little Prince
+"One only understands the things that one tames." — Antoine de Saint-Exupéry, The Little Prince
+"The stars are yours because I have never seen anyone else who owns them." — Antoine de Saint-Exupéry, The Little Prince
+"Where are the people? You are alone in the desert." — Antoine de Saint-Exupéry, The Little Prince
+"The desert is beautiful because it hides a well somewhere." — Antoine de Saint-Exupéry, The Little Prince
+"You become responsible for what you have made precious." — Antoine de Saint-Exupéry, The Little Prince
+"What is important is invisible." — Antoine de Saint-Exupéry, The Little Prince
+"The house, the stars, the desert—what gives them their beauty is something invisible." — Antoine de Saint-Exupéry, The Little Prince
+"And, when you want something, all the universe conspires in helping you to achieve it." — Paulo Coelho, The Alchemist
+"It's the possibility of having a dream come true that makes life interesting." — Paulo Coelho, The Alchemist
+"People are capable, at any time in their lives, of doing what they dream of." — Paulo Coelho, The Alchemist
+"There is only one thing that makes a dream impossible to achieve: the fear of failure." — Paulo Coelho, The Alchemist
+"The secret of life, though, is to fall seven times and to get up eight times." — Paulo Coelho, The Alchemist
+"When we strive to become better than we are, everything around us becomes better too." — Paulo Coelho, The Alchemist
+"One is loved because one is loved. No reason is needed for loving." — Paulo Coelho, The Alchemist
+"Remember that wherever your heart is, there you will find your treasure." — Paulo Coelho, The Alchemist
+"The simple things are also the most extraordinary things, and only the wise can see them." — Paulo Coelho, The Alchemist
+"Every blessing ignored becomes a curse." — Paulo Coelho, The Alchemist
+"Intuition is really a sudden immersion of the soul into the universal current of life." — Paulo Coelho, The Alchemist
+"When each day is the same as the next, it is because people fail to recognize the good things that happen in their lives." — Paulo Coelho, The Alchemist
+"Carpe diem. Seize the day, boys. Make your lives extraordinary." — Dead Poets Society
+"No matter what anybody tells you, words and ideas can change the world." — Dead Poets Society
+"We don't read and write poetry because it's cute. We read and write poetry because we are members of the human race." — Dead Poets Society
+"There is a time for daring and a time for caution, and a wise man understands which is called for." — Dead Poets Society
+"I went to the woods because I wanted to live deliberately." — Dead Poets Society
+"I wanted to live deep and suck out all the marrow of life." — Dead Poets Society
+"To quote from Whitman, 'O me! O life!... of the questions of these recurring; of the endless trains of the faithless... what good amid these, O me, O life?' Answer: That you are here—that life exists, and identity; that the powerful play goes on, and you may contribute a verse." — Dead Poets Society
+"The powerful play goes on, and you may contribute a verse." — Walt Whitman, quoted in Dead Poets Society
+"I sound my barbaric yawp over the rooftops of the world." — Walt Whitman, quoted in Dead Poets Society
+"Remember who you are." — Mufasa, The Lion King
+"The past can hurt. But the way I see it, you can either run from it or learn from it." — Rafiki, The Lion King
+"Hakuna Matata. It means no worries." — Timon and Pumbaa, The Lion King
+"The flower that blooms in adversity is the most rare and beautiful of all." — The Emperor, Mulan
+"Have courage and be kind." — Cinderella, Cinderella
+"You are braver than you believe, stronger than you seem, and smarter than you think." — Christopher Robin, Winnie the Pooh
+"Why, sometimes I've believed as many as six impossible things before breakfast." — The Queen, Alice in Wonderland
+"Not everyone can become a great artist, but a great artist can come from anywhere." — Anton Ego, Ratatouille
+"Venture outside your comfort zone. The rewards are worth it." — Rapunzel, Tangled
+"Keep moving forward." — Meet the Robinsons
