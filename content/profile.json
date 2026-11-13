@@ -8,17 +8,17 @@
   "links": [
     {
       "name": "Facebook",
-      "label": "Facebook",
+      "label":"Facebook",
       "url": "https://facebook.com/your-account"
     },
     {
       "name": "GitHub",
-      "label": "Github",
+      "label":"Github",
       "url": "https://github.com/alyyyyyanna"
     },
     {
       "name": "LinkedIn",
-      "label": "LinkedIn",
+      "label":"LinkedIn",
       "url": "www.linkedin.com/in/alyanna-miñoza-30818a345"
     }
   ]
