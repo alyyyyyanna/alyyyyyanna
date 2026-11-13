@@ -1,27 +1,27 @@
 [
   {
-    "id": "peak-hunter",
-    "title": "Peak Hunter",
+    "id": "Olympus Mons",
+    "title": "Olympus Mons",
     "image": "assets/planet-peak.svg",
     "imageSide": "left",
-    "badge": "PRIVATE",
+    "badge": "PUBLIC",
     "description": "[A short description, in your words.]",
     "detail": "Still exploring. No public link yet.",
     "tags": ["[tag]", "[tag]", "[tag]"]
   },
   {
-    "id": "lantern-world",
-    "title": "The lantern world",
+    "id": "grid9ora",
+    "title": "grid9ora",
     "image": "assets/lantern-world.svg",
     "imageSide": "right",
-    "badge": "",
+    "badge": "ON GOING",
     "description": "[A future project. Your sentences, when you have them.]",
     "detail": "[More about this world, if you want it.]",
     "tags": ["[tag]", "[tag]", "[tag]"]
   },
   {
-    "id": "jeepney-router",
-    "title": "Jeepney Router",
+    "id": "Space Traveler",
+    "title": "Space Traveler",
     "image": "assets/planet-route.svg",
     "imageSide": "left",
     "badge": "PRIVATE",
