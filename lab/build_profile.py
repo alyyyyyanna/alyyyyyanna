@@ -665,11 +665,13 @@ def social_links(profile: dict) -> list[dict]:
 def label_svg(serif: Font, label: str) -> str:
     size = 18
     text_width = serif.measure(label, size, tracking=0.2)
-    width = text_width + 22
+    gap = 8
+    pill = text_width + 22
+    width = gap + pill
     height = 32
-    text = serif.draw(label, 11, 22.5, size, CREAM, tracking=0.2)[0]
+    text = serif.draw(label, gap + 11, 22.5, size, CREAM, tracking=0.2)[0]
     return f'''<svg xmlns="http://www.w3.org/2000/svg" width="{width:.0f}" height="{height}" viewBox="0 0 {width:.2f} {height}" role="img">
-  <rect width="{width:.2f}" height="{height}" rx="16" fill="#141024"/>
+  <rect x="{gap}" width="{pill:.2f}" height="{height}" rx="16" fill="#141024"/>
   {text}
 </svg>
 '''
@@ -689,8 +691,8 @@ def link_rows(profile: dict) -> str:
         url = (item.get("url") or "").strip() or "https://example.com/your-account"
         label = item.get("label") or "[link]"
         rows.append(
-            f'<a href="{xml(url)}"><img src="assets/profile/icons/{slug}.svg" width="32" height="32" alt="{xml(item["name"])}">'
-            f'&nbsp;<img src="assets/profile/icons/{slug}-label.svg" height="32" alt="{xml(label)}"></a>'
+            f'<a href="{xml(url)}"><img align="absmiddle" src="assets/profile/icons/{slug}.svg" width="32" height="32" alt="{xml(item["name"])}">'
+            f'<img align="absmiddle" src="assets/profile/icons/{slug}-label.svg" height="32" alt="{xml(label)}"></a>'
         )
     return "<br>\n".join(rows)
 
