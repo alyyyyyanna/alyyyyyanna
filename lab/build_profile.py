@@ -44,7 +44,7 @@ STAR = (
     "M0 -10 L2.35 -3.09 L9.51 -3.09 L3.63 1.18 L5.88 8.09 "
     "L0 3.82 L-5.88 8.09 L-3.63 1.18 L-9.51 -3.09 L-2.35 -3.09 Z"
 )
-# Invertocat from Simple Icons (ISC). Used small, as the GitHub mark.
+# Marks from Simple Icons (ISC), drawn small and in the page colors.
 GITHUB_MARK = (
     "M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577"
     " 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61-.546-1.387-1.333-1.756"
@@ -55,6 +55,20 @@ GITHUB_MARK = (
     " 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.91 1.235 3.22 0 4.61-2.807"
     " 5.625-5.48 5.92.43.372.823 1.102.823 2.222 0 1.606-.015 2.896-.015 3.286 0 .322.216"
     ".694.825.576C20.565 21.796 24 17.3 24 12c0-6.63-5.37-12-12-12z"
+)
+FACEBOOK_MARK = (
+    "M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125"
+    " 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235"
+    " 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385"
+    "C19.612 23.027 24 18.062 24 12.073z"
+)
+LINKEDIN_MARK = (
+    "M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136"
+    " 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37"
+    " 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063"
+    " 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542"
+    "C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0"
+    " 22.222 0h.003z"
 )
 
 
@@ -455,162 +469,246 @@ def refresh_stats(stats: dict, advance_counter: bool = True) -> dict:
 
 
 def portrait_frame(cx: float, cy: float, rx: float, ry: float) -> str:
-    beads = []
-    for index in range(32):
-        angle = index / 32 * math.tau
-        beads.append(
-            f'<circle cx="{cx + (rx + 1) * math.cos(angle):.1f}" cy="{cy + (ry + 1) * math.sin(angle):.1f}" '
-            f'r="2.15" fill="{GOLD}" stroke="#7a5a22" stroke-width="0.35"/>'
-        )
-    flourishes = []
+    """A thin gold ring and the same diamond used on the rules below."""
+    diamonds = []
     for angle in (0, math.pi / 2, math.pi, 3 * math.pi / 2):
-        fx = cx + (rx + 8) * math.cos(angle)
-        fy = cy + (ry + 8) * math.sin(angle)
-        flourishes.append(
-            f'<g transform="translate({fx:.1f},{fy:.1f}) rotate({math.degrees(angle):.1f})">'
-            f'<path d="M0 0 C6 -7 12 -8 16 0 C12 8 6 7 0 0 Z" fill="{GOLD}" stroke="#7a5a22" stroke-width="0.4"/>'
-            f"</g>"
+        fx = cx + (rx + 11) * math.cos(angle)
+        fy = cy + (ry + 11) * math.sin(angle)
+        diamonds.append(
+            f'<g transform="translate({fx:.1f},{fy:.1f}) scale(0.62)" fill="{GOLD}">'
+            f'<path d="M0 -6.5 L4.6 0 L0 6.5 L-4.6 0 Z"/></g>'
         )
     return f'''
-    <ellipse cx="{cx}" cy="{cy}" rx="{rx}" ry="{ry}" fill="none" stroke="#8a6428" stroke-width="8"/>
-    <ellipse cx="{cx}" cy="{cy}" rx="{rx - 6}" ry="{ry - 7}" fill="none" stroke="#f3dd9a" stroke-width="3.2">
-      <animate attributeName="stroke-opacity" values="0.78;1;0.78" dur="5.5s" repeatCount="indefinite"/>
+    <ellipse cx="{cx}" cy="{cy}" rx="{rx + 18}" ry="{ry + 18}" fill="none" stroke="{PURPLE}" stroke-width="1.15"
+      stroke-dasharray="1.5 7" opacity="0.8">
+      <animate attributeName="stroke-dashoffset" from="0" to="-40" dur="9s" repeatCount="indefinite"/>
     </ellipse>
-    <ellipse cx="{cx}" cy="{cy}" rx="{rx - 11}" ry="{ry - 12}" fill="none" stroke="#a07830" stroke-width="1.15"/>
-    {''.join(beads)}
-    {''.join(flourishes)}
+    <ellipse id="orbit" cx="{cx}" cy="{cy}" rx="{rx + 18}" ry="{ry + 18}" fill="none"/>
+    <circle r="2.2" fill="#fff6d8">
+      <animateMotion dur="18s" repeatCount="indefinite">
+        <mpath href="#orbit"/>
+      </animateMotion>
+    </circle>
+    <ellipse cx="{cx}" cy="{cy}" rx="{rx + 4}" ry="{ry + 4}" fill="none" stroke="{PURPLE}" stroke-width="1.25" opacity="0.9"/>
+    <ellipse cx="{cx}" cy="{cy}" rx="{rx}" ry="{ry}" fill="none" stroke="{GOLD}" stroke-width="1.7">
+      <animate attributeName="stroke-opacity" values="0.65;1;0.65" dur="6s" repeatCount="indefinite"/>
+    </ellipse>
+    <ellipse cx="{cx}" cy="{cy}" rx="{rx - 7}" ry="{ry - 8}" fill="none" stroke="{CREAM}" stroke-width="0.7" opacity="0.45"/>
+    {''.join(diamonds)}
     '''
 
 
-# Discord mark from Simple Icons (ISC), drawn small beside the portrait.
-DISCORD_MARK = (
-    "M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864"
-    "-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079"
-    "-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099"
-    " 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028"
-    " 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892"
-    ".077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793"
-    " 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006"
-    ".127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993"
-    "a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177"
-    "-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157"
-    "-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418"
-    "-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419"
-    " 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"
-)
+def panel(width: float, height: float, body: str, title: str, desc: str, fade_left: bool, fade_right: bool) -> str:
+    """One half of the header. The shared edge stays solid so the two halves read as one sky."""
+    left = "#000" if fade_left else "#fff"
+    right = "#000" if fade_right else "#fff"
+    side = 0.08
+    vert = 0.05
+    return f'''<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" viewBox="0 0 {width} {height}" role="img" aria-labelledby="assetTitle assetDesc">
+<title id="assetTitle">{xml(title)}</title>
+<desc id="assetDesc">{xml(desc)}</desc>
+<defs>
+  <linearGradient id="fadeX" x1="0" y1="0" x2="1" y2="0">
+    <stop offset="0" stop-color="{left}"/>
+    <stop offset="{side}" stop-color="#fff"/>
+    <stop offset="{1 - side}" stop-color="#fff"/>
+    <stop offset="1" stop-color="{right}"/>
+  </linearGradient>
+  <linearGradient id="fadeY" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#000"/>
+    <stop offset="{vert}" stop-color="#fff"/>
+    <stop offset="{1 - vert}" stop-color="#fff"/>
+    <stop offset="1" stop-color="#000"/>
+  </linearGradient>
+  <mask id="fadeMX" maskUnits="userSpaceOnUse" x="0" y="0" width="{width}" height="{height}">
+    <rect width="{width}" height="{height}" fill="url(#fadeX)"/>
+  </mask>
+  <mask id="edgeFade" maskUnits="userSpaceOnUse" x="0" y="0" width="{width}" height="{height}">
+    <rect width="{width}" height="{height}" fill="url(#fadeY)" mask="url(#fadeMX)"/>
+  </mask>
+</defs>
+<g mask="url(#edgeFade)">
+{body}
+</g>
+</svg>
+'''
 
 
-def header_icons(serif: Font, labels: list[str], x: float, y: float) -> str:
-    """Marks under the portrait. Each one has a label beside it, from profile.json."""
-    marks = []
-    for index, label in enumerate(labels):
-        cy = y + index * 36
-        cx = x
-        marks.append(f'<circle cx="{cx}" cy="{cy}" r="8.2" fill="#5c4030"/>')
-        if index == 0:
-            marks.append(
-                f'<g transform="translate({cx - 6.1},{cy - 6.1}) scale(0.51)">'
-                f'<path d="{GITHUB_MARK}" fill="#f6efe2"/></g>'
-            )
-        elif index == 1:
-            marks.append(serif.draw("f", cx + 0.4, cy + 3.5, 11, "#f6efe2", "middle")[0])
-        elif index == 2:
-            marks.append(
-                f'<g transform="translate({cx - 5.2},{cy - 5.2})" fill="none" stroke="#f6efe2" stroke-width="1.15">'
-                f'<rect x="0.6" y="0.6" width="9.2" height="9.2" rx="2.4"/>'
-                f'<circle cx="5.2" cy="5.2" r="2.15"/>'
-                f'<circle cx="8.15" cy="2.35" r="0.7" fill="#f6efe2" stroke="none"/>'
-                f"</g>"
-            )
-        else:
-            marks.append(
-                f'<g transform="translate({cx - 5.4},{cy - 5.4}) scale(0.45)">'
-                f'<path d="{DISCORD_MARK}" fill="#f6efe2"/></g>'
-            )
-        marks.append(serif.draw(label, cx + 18, cy + 7, 22, INK_SOFT)[0])
-    return "\n".join(marks)
+def sky(width: float, height: float, glow_x: float, blob_x: float, blob_y: float, blob_fill: str) -> str:
+    return f'''
+    <rect width="{width}" height="{height}" fill="#090712"/>
+    <radialGradient id="glow" gradientUnits="userSpaceOnUse" cx="{glow_x}" cy="{height * 0.28:.1f}" r="{max(width, height) * 0.95:.1f}">
+      <stop offset="0%" stop-color="#2a2144"/>
+      <stop offset="48%" stop-color="#141024"/>
+      <stop offset="100%" stop-color="#090712"/>
+    </radialGradient>
+    <rect width="{width}" height="{height}" fill="url(#glow)"/>
+    <ellipse cx="{blob_x}" cy="{blob_y}" rx="168" ry="72" fill="{blob_fill}" opacity="0.16"/>
+    '''
 
 
-def build_header(profile: dict, script: Font, italic: Font, serif: Font) -> str:
-    width, height = 920, 470
-    cx, cy, rx, ry = 168, 150, 70, 84
-    paper = (
-        "M128 48 C300 28 640 24 820 42 C888 50 904 86 898 140 "
-        "L906 310 C914 400 860 432 788 438 C520 456 250 450 140 428 "
-        "C62 414 40 300 48 230 L40 118 C36 70 72 54 128 48 Z"
-    )
-    name = profile["name"]
-    name_size = 48
-    while script.measure(name, name_size, tracking=-0.6) > 610 and name_size > 30:
-        name_size -= 1
-    bio_size = 15.2
-    bio_lines = wrap(italic, profile["bio"], bio_size, 590)
-    while len(bio_lines) > 8 and bio_size > 12:
-        bio_size -= 0.4
-        bio_lines = wrap(italic, profile["bio"], bio_size, 590)
+def drifting_stars(width: float, height: float, count: int, seed: int) -> str:
+    return f'''
+    <g>
+      <animateTransform attributeName="transform" type="translate" values="0 0; 8 -12; 0 0" dur="14s" repeatCount="indefinite"/>
+      {star_field(width, height, count, seed, margin=28)}
+    </g>'''
+
+
+def build_portrait_panel() -> str:
+    width, height = 340, 300
+    cx, cy, rx, ry = 176, 156, 68, 84
     portrait = ROOT / "assets" / "portrait.png"
     photo = ""
     if portrait.exists():
         photo = f'''
         <clipPath id="portraitClip">
-          <ellipse cx="{cx}" cy="{cy}" rx="{rx - 14}" ry="{ry - 16}"/>
+          <ellipse cx="{cx}" cy="{cy}" rx="{rx - 12}" ry="{ry - 14}"/>
         </clipPath>
-        <image href="{data_uri(portrait)}" x="{cx - rx + 8}" y="{cy - ry + 6}" width="{(rx - 8) * 2}" height="{(ry - 6) * 2}"
+        <image href="{data_uri(portrait)}" x="{cx - rx + 6}" y="{cy - ry + 4}" width="{(rx - 6) * 2}" height="{(ry - 4) * 2}"
           preserveAspectRatio="xMidYMid slice" clip-path="url(#portraitClip)"/>
         '''
-    labels = list(profile.get("icon_labels") or ["[link]", "[link]", "[link]", "[link]"])
-    while len(labels) < 4:
-        labels.append("[link]")
-    name_x, name_y = 575, 86
-    name_width = script.measure(name, name_size, tracking=-0.8)
-    leading = bio_size + 5.5
-    bio_y = name_y + 3 * leading
-    sparkles = []
+    body = f'''
+    {sky(width, height, 460, 150, 108, PURPLE)}
+    {star_field(width, height, 16, 21, margin=18)}
+    {drifting_stars(width, height, 5, 30)}
+    <ellipse cx="{cx}" cy="{cy}" rx="{rx + 26}" ry="{ry + 28}" fill="{PURPLE}" opacity="0.14"/>
+    {photo}
+    {portrait_frame(cx, cy, rx, ry)}
+    '''
+    return panel(width, height, body, "Portrait", "The portrait at the top of the page.", True, False)
+
+
+def build_words_panel(profile: dict, script: Font, italic: Font) -> str:
+    width, height = 580, 426
+    name = profile["name"]
+    name_size = 52
+    while script.measure(name, name_size, tracking=-0.6) > 500 and name_size > 32:
+        name_size -= 1
+    bio_size = 16
+    bio_lines = wrap(italic, profile["bio"], bio_size, 500)
+    while len(bio_lines) > 7 and bio_size > 13:
+        bio_size -= 0.4
+        bio_lines = wrap(italic, profile["bio"], bio_size, 500)
+    name_x, name_y = width / 2, 86
+    name_width = script.measure(name, name_size, tracking=-0.6)
+    leading = bio_size + 6.5
+    rule_y = name_y + 22
+    bio_y = rule_y + 36
+    twinkles = []
     for sx, sy, scale, begin in (
-        (name_x - name_width / 2 - 22, name_y - 18, 0.85, 0.0),
-        (name_x - name_width / 2 + 36, name_y - 46, 0.5, 0.6),
-        (name_x - 8, name_y - 52, 0.42, 1.3),
-        (name_x + name_width / 2 - 28, name_y - 48, 0.55, 0.3),
-        (name_x + name_width / 2 + 16, name_y - 14, 0.8, 1.1),
-        (name_x + 48, name_y - 44, 0.38, 1.8),
+        (name_x - name_width / 2 - 16, name_y - 28, 0.42, 0.2),
+        (name_x + name_width / 2 + 14, name_y - 22, 0.5, 1.1),
+        (name_x - 20, name_y - 48, 0.32, 1.7),
     ):
-        sparkles.append(
-            f'<g transform="translate({sx:.1f},{sy:.1f})">'
+        twinkles.append(
+            f'<g transform="translate({sx:.1f},{sy:.1f}) scale({scale})">'
             f'<g>'
-            f'<animate attributeName="opacity" values="0.2;1;0.2" dur="2.2s" begin="{begin}s" repeatCount="indefinite"/>'
-            f'<animateTransform attributeName="transform" type="scale" values="{scale * 0.65:.2f};{scale:.2f};{scale * 0.65:.2f}" dur="2.2s" begin="{begin}s" repeatCount="indefinite"/>'
-            f'<path d="{STAR}" fill="{GOLD}" stroke="#a07830" stroke-width="0.55" stroke-linejoin="round"/>'
+            f'<animate attributeName="opacity" values="0.25;1;0.25" dur="3.2s" begin="{begin}s" repeatCount="indefinite"/>'
+            f'<path d="{STAR}" fill="{GOLD}"/>'
             f"</g></g>"
         )
     body = f'''
-    <path d="{paper}" fill="#6d5134" opacity="0.28" transform="translate(0 7)"/>
-    <ellipse cx="108" cy="70" rx="52" ry="22" fill="#b88958"/>
-    <ellipse cx="830" cy="410" rx="58" ry="20" fill="#a87848"/>
-    <path d="{paper}" fill="url(#parchment)"/>
-    <path d="{paper}" fill="url(#paperGrain)" opacity="0.28"/>
-    <ellipse cx="112" cy="64" rx="40" ry="13" fill="#f4e2c4"/>
-    <ellipse cx="100" cy="74" rx="18" ry="7" fill="#8d623c"/>
-    <ellipse cx="836" cy="404" rx="46" ry="12" fill="#f0d7b0"/>
-    <ellipse cx="848" cy="414" rx="20" ry="7" fill="#8d623c"/>
-    {photo}
-    {portrait_frame(cx, cy, rx, ry)}
-    {''.join(sparkles)}
-    {script.draw(name, name_x, name_y, name_size, INK, "middle", tracking=-0.8)[0]}
-    {draw_lines(italic, bio_lines, name_x, bio_y, bio_size, INK_SOFT, leading, "middle")}
-    {header_icons(serif, labels[:4], cx - 6, cy + ry + 28)}
+    {sky(width, height, 120, 400, 300, PINK)}
+    {star_field(width, height, 14, 8, margin=20)}
+    {drifting_stars(width, height, 5, 14)}
+    {''.join(twinkles)}
+    {script.draw(name, name_x, name_y, name_size, CREAM, "middle", tracking=-0.6)[0]}
+    {gold_rule(70, width - 70, rule_y)}
+    {draw_lines(italic, bio_lines, name_x, bio_y, bio_size, "#d9c6d0", leading, "middle")}
     '''
-    defs = '''
-    <linearGradient id="parchment" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#fbf4e6"/>
-      <stop offset="0.55" stop-color="#f1ddc0"/>
-      <stop offset="1" stop-color="#e4c79a"/>
-    </linearGradient>
-    <filter id="paperGrain" x="0" y="0" width="100%" height="100%">
-      <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" seed="4"/>
-      <feColorMatrix type="matrix" values="0 0 0 0 0.45  0 0 0 0 0.32  0 0 0 0 0.18  0 0 0 0.55 0"/>
-    </filter>
-    '''
-    return document(width, height, defs, body, profile["name"], "The scroll at the top of the page.", side=0.055, vert=0.03)
+    return panel(
+        width,
+        height,
+        body,
+        name,
+        "The name and the lines under it. Edit them in content/profile.json.",
+        False,
+        True,
+    )
+
+
+def icon_badge(path: str) -> str:
+    return f'''<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64" role="img">
+  <circle cx="32" cy="32" r="30" fill="#1a1230" stroke="{GOLD}" stroke-width="1.5"/>
+  <circle cx="32" cy="32" r="26.5" fill="none" stroke="{PURPLE}" stroke-width="1.1">
+    <animate attributeName="stroke-opacity" values="0.3;0.95;0.3" dur="4.8s" repeatCount="indefinite"/>
+  </circle>
+  <g transform="translate(17,17) scale(1.25)" fill="{CREAM}">
+    <path d="{path}"/>
+  </g>
+</svg>
+'''
+
+
+def write_social_icons() -> None:
+    folder = ROOT / "assets" / "profile" / "icons"
+    marks = {"facebook": FACEBOOK_MARK, "github": GITHUB_MARK, "linkedin": LINKEDIN_MARK}
+    for name, path in marks.items():
+        save(folder / f"{name}.svg", icon_badge(path))
+
+
+def link_slug(name: str) -> str:
+    return re.sub(r"[^a-z0-9]+", "", name.lower())
+
+
+def social_links(profile: dict) -> list[dict]:
+    found = profile.get("links")
+    if found:
+        return list(found)
+    return [
+        {"name": "Facebook", "label": "[link]", "url": "https://facebook.com/your-account"},
+        {"name": "GitHub", "label": "[link]", "url": "https://github.com/alyyyyyanna"},
+        {"name": "LinkedIn", "label": "[link]", "url": "https://www.linkedin.com/in/your-account"},
+    ]
+
+
+def label_svg(serif: Font, label: str) -> str:
+    size = 18
+    text_width = serif.measure(label, size, tracking=0.2)
+    width = text_width + 22
+    height = 32
+    text = serif.draw(label, 11, 22.5, size, CREAM, tracking=0.2)[0]
+    return f'''<svg xmlns="http://www.w3.org/2000/svg" width="{width:.0f}" height="{height}" viewBox="0 0 {width:.2f} {height}" role="img">
+  <rect width="{width:.2f}" height="{height}" rx="16" fill="#141024"/>
+  {text}
+</svg>
+'''
+
+
+def write_link_labels(profile: dict, serif: Font) -> None:
+    folder = ROOT / "assets" / "profile" / "icons"
+    for item in social_links(profile):
+        label = item.get("label") or "[link]"
+        save(folder / f"{link_slug(item['name'])}-label.svg", label_svg(serif, label))
+
+
+def link_rows(profile: dict) -> str:
+    rows = []
+    for item in social_links(profile):
+        slug = link_slug(item["name"])
+        url = (item.get("url") or "").strip() or "https://example.com/your-account"
+        label = item.get("label") or "[link]"
+        rows.append(
+            f'<a href="{xml(url)}"><img src="assets/profile/icons/{slug}.svg" width="32" height="32" alt="{xml(item["name"])}">'
+            f'&nbsp;<img src="assets/profile/icons/{slug}-label.svg" height="32" alt="{xml(label)}"></a>'
+        )
+    return "<br>\n".join(rows)
+
+
+def header_block(profile: dict) -> str:
+    words = f'{profile.get("name", "")}. {profile.get("bio", "")}'
+    return f'''<table cellspacing="0" cellpadding="0">
+<tr>
+<td width="37%" align="center" valign="top">
+<img src="assets/profile/header-portrait.svg" alt="" width="100%">
+{link_rows(profile)}
+</td>
+<td width="63%" valign="top">
+<img src="assets/profile/header-words.svg" alt="{xml(words)}" width="100%">
+</td>
+</tr>
+</table>'''
 
 
 def build_tagline(profile: dict, script: Font, italic: Font) -> str:
@@ -1065,7 +1163,7 @@ def stamp(value: str) -> str:
     return hashlib.sha1(value.encode("utf-8")).hexdigest()[:8]
 
 
-def write_readme(projects: list[dict], quote: str, stats: dict) -> None:
+def write_readme(profile: dict, projects: list[dict], quote: str, stats: dict) -> None:
     cards = "\n".join(
         "\n".join(
             [
@@ -1079,7 +1177,13 @@ def write_readme(projects: list[dict], quote: str, stats: dict) -> None:
     text = f'''<!--
 The pictures are built from the files in content/.
 
-name, scroll text, welcome line, and the four [link] labels under the portrait: content/profile.json
+name and the lines under the name: content/profile.json
+  name and bio. They are drawn into assets/profile/header-words.svg only.
+account links under the portrait: content/profile.json, the links list
+  label is the words beside the icon. url is where a click goes.
+  Type the account there. The icon files in assets/profile/icons stay as they are.
+  Facebook, GitHub, and LinkedIn are separate pictures, so a click opens url
+  instead of opening the picture file.
 one project per object, in order: content/projects.json
   image is a planet file already in assets/, or a new one
   imageSide is "left" or "right"
@@ -1098,9 +1202,7 @@ Pushing a change in content/ redraws the pictures on GitHub.
 The picture address changes with the words, so the page does not keep the old drawing.
 -->
 
-<p align="center">
-  <img src="assets/profile/header.svg" alt="Alyanna Marie Minoza" width="100%">
-</p>
+{header_block(profile)}
 
 <br>
 
@@ -1132,9 +1234,9 @@ The picture address changes with the words, so the page does not keep the old dr
     save(ROOT / "README.md", text)
 
 
-def write_preview(projects: list[dict]) -> None:
+def write_preview(profile: dict, projects: list[dict]) -> None:
     cards = "\n".join(
-        f'    <img src="assets/profile/cards/{project["id"]}.svg" alt="">' for project in projects
+        f'    <img src="assets/profile/cards/{project["id"]}.svg" alt="" width="100%">' for project in projects
     )
     html = f"""<!DOCTYPE html>
 <html lang="en">
@@ -1144,24 +1246,26 @@ def write_preview(projects: list[dict]) -> None:
   <style>
     body {{ margin: 0; background: #05040a; color: #f6efe4; font-family: Georgia, serif; }}
     main {{ width: min(920px, 100%); margin: 0 auto; padding: 28px 0 80px; }}
-    img {{ display: block; width: 100%; height: auto; }}
-    .gap {{ height: 48px; }}
+    img[width="100%"] {{ display: block; width: 100%; height: auto; }}
+    img[height="32"] {{ display: inline-block; width: auto; height: 32px; vertical-align: middle; }}
+    a {{ color: #f7f1e6; text-decoration: none; }}
+    .gap {{ height: 36px; }}
     table {{ width: 100%; border-collapse: collapse; }}
     td {{ vertical-align: top; padding: 0; }}
   </style>
 </head>
 <body>
   <main>
-    <img src="assets/profile/header.svg" alt="">
+    {header_block(profile)}
     <div class="gap"></div>
-    <img src="assets/profile/tagline.svg" alt="">
-    <img src="assets/profile/stack-field.svg" alt="">
-    <img src="assets/profile/projects-label.svg" alt="">
+    <img src="assets/profile/tagline.svg" alt="" width="100%">
+    <img src="assets/profile/stack-field.svg" alt="" width="100%">
+    <img src="assets/profile/projects-label.svg" alt="" width="100%">
 {cards}
     <table>
       <tr>
-        <td width="58%"><img src="assets/profile/activity.svg" alt=""></td>
-        <td width="42%"><img src="assets/profile/quote.svg" alt=""></td>
+        <td width="58%"><img src="assets/profile/activity.svg" alt="" width="100%"></td>
+        <td width="42%"><img src="assets/profile/quote.svg" alt="" width="100%"></td>
       </tr>
     </table>
   </main>
@@ -1179,7 +1283,13 @@ def build_all(advance_counter: bool = False) -> None:
     stats = load_json(stats_path)
     stats = refresh_stats(stats, advance_counter=advance_counter)
     save(stats_path, json.dumps(stats, indent=2) + "\n")
-    save(ROOT / "assets" / "profile" / "header.svg", build_header(profile, script, italic, serif))
+    save(ROOT / "assets" / "profile" / "header-portrait.svg", build_portrait_panel())
+    save(ROOT / "assets" / "profile" / "header-words.svg", build_words_panel(profile, script, italic))
+    write_social_icons()
+    write_link_labels(profile, serif)
+    old_header = ROOT / "assets" / "profile" / "header.svg"
+    if old_header.exists():
+        old_header.unlink()
     save(ROOT / "assets" / "profile" / "tagline.svg", build_tagline(profile, script, italic))
     save(ROOT / "assets" / "profile" / "stack-field.svg", build_stack(script, serif))
     save(ROOT / "assets" / "profile" / "projects-label.svg", build_projects_label(script))
@@ -1188,8 +1298,8 @@ def build_all(advance_counter: bool = False) -> None:
     save(ROOT / "assets" / "profile" / "activity.svg", build_activity(stats, script, serif, italic))
     quote = quote_for()
     save(ROOT / "assets" / "profile" / "quote.svg", build_quote(quote, script))
-    write_readme(projects, quote, stats)
-    write_preview(projects)
+    write_readme(profile, projects, quote, stats)
+    write_preview(profile, projects)
 
 
 def refresh_daily() -> None:
@@ -1201,8 +1311,10 @@ def refresh_daily() -> None:
     save(ROOT / "assets" / "profile" / "activity.svg", build_activity(stats, script, serif, italic))
     quote = quote_for()
     save(ROOT / "assets" / "profile" / "quote.svg", build_quote(quote, script))
+    profile = load_json(ROOT / "content" / "profile.json")
     projects = load_json(ROOT / "content" / "projects.json")
-    write_readme(projects, quote, stats)
+    write_link_labels(profile, serif)
+    write_readme(profile, projects, quote, stats)
 
 
 if __name__ == "__main__":

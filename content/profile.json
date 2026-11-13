@@ -5,5 +5,21 @@
   "tagline_line_2": "a story",
   "welcome_line_1": "Hello weary traveler, welcome to the collection of my",
   "welcome_line_2": "adventures",
-  "icon_labels": ["[link]", "[link]", "[link]", "[link]"]
+  "links": [
+    {
+      "name": "Facebook",
+      "label": "[link]",
+      "url": "https://facebook.com/your-account"
+    },
+    {
+      "name": "GitHub",
+      "label": "[link]",
+      "url": "https://github.com/alyyyyyanna"
+    },
+    {
+      "name": "LinkedIn",
+      "label": "[link]",
+      "url": "https://www.linkedin.com/in/your-account"
+    }
+  ]
 }
