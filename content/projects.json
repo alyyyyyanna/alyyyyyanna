@@ -5,7 +5,7 @@
     "image": "assets/planet-peak.svg",
     "imageSide": "left",
     "badge": "PUBLIC",
-    "description": "[A short description, in your words.]",
+    "description": "",
     "detail": "Still exploring. No public link yet.",
     "tags": ["HTML", "CSS", "JS"]
   },
@@ -15,7 +15,7 @@
     "image": "assets/lantern-world.svg",
     "imageSide": "right",
     "badge": "ON GOING",
-    "description": "[A future project. Your sentences, when you have them.]",
+    "description": "",
     "detail": "[More about this world, if you want it.]",
     "tags": ["HTML", "CSS", "JS", "TS"]
   },
@@ -25,7 +25,7 @@
     "image": "assets/planet-route.svg",
     "imageSide": "left",
     "badge": "PRIVATE",
-    "description": "[A short description, in your words.]",
+    "description": "",
     "detail": "Still exploring. No public link yet.",
     "tags": ["HTML", "CSS", "JS"]
   }
