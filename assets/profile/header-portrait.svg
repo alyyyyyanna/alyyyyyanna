@@ -31,6 +31,10 @@
       <stop offset="100%" stop-color="#090712"/>
     </radialGradient>
     <rect width="340" height="300" fill="url(#glow)"/>
+<<<<<<< HEAD
+=======
+    <ellipse cx="150" cy="108" rx="168" ry="72" fill="#7d6bb8" opacity="0.16"/>
+>>>>>>> 40b0336a3e0bd8e0ca6fbe3494d88d609c67dfa9
     
     <g transform="translate(68.1,200.1) scale(0.280)" fill="#f0d7a2"><animate attributeName="opacity" values="0.58;1;0.58" dur="5.6s" begin="2.02s" repeatCount="indefinite"/><path d="M0 -10 L2.35 -3.09 L9.51 -3.09 L3.63 1.18 L5.88 8.09 L0 3.82 L-5.88 8.09 L-3.63 1.18 L-9.51 -3.09 L-2.35 -3.09 Z"/></g>
 <circle cx="173.8" cy="151.3" r="0.90" fill="#fff6d8" opacity="0.29"/>
@@ -57,7 +61,11 @@
 <g transform="translate(73.4,233.4) scale(0.210)" fill="#e7b4c4"><animate attributeName="opacity" values="0.88;1;0.88" dur="2.8s" begin="1.00s" repeatCount="indefinite"/><path d="M0 -10 L2.35 -3.09 L9.51 -3.09 L3.63 1.18 L5.88 8.09 L0 3.82 L-5.88 8.09 L-3.63 1.18 L-9.51 -3.09 L-2.35 -3.09 Z"/></g>
 <circle cx="98.6" cy="165.3" r="1.15" fill="#e7b4c4" opacity="0.63"/>
     </g>
+<<<<<<< HEAD
     <ellipse cx="176" cy="156" rx="104" ry="124" fill="#7d6bb8" opacity="0.12"/>
+=======
+    <ellipse cx="176" cy="156" rx="94" ry="112" fill="#7d6bb8" opacity="0.14"/>
+>>>>>>> 40b0336a3e0bd8e0ca6fbe3494d88d609c67dfa9
     
         <clipPath id="portraitClip">
           <ellipse cx="176" cy="156" rx="56" ry="70"/>
