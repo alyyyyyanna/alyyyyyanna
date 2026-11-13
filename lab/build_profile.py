@@ -658,7 +658,7 @@ def stack_icons() -> list[Path]:
     return found
 
 
-def place_icon(path: Path, index: int, x: float, y: float, size: float = 72) -> str:
+def place_icon(path: Path, index: int, x: float, y: float, size: float = 46) -> str:
     if path.suffix.lower() == ".svg":
         return inline_svg(path, f"stack{index}", x - size / 2, y - size / 2, size, size)
     return (
@@ -667,16 +667,33 @@ def place_icon(path: Path, index: int, x: float, y: float, size: float = 72) -> 
     )
 
 
-def build_stack(script: Font) -> str:
+def stack_label(path: Path) -> str:
+    stem = re.sub(r"^\d+-", "", path.stem)
+    return {
+        "cplusplus": "c++",
+        "javascript": "js",
+        "typescript": "ts",
+        "html": "html",
+    }.get(stem, stem)
+
+
+def build_stack(script: Font, serif: Font) -> str:
     icons = stack_icons()
     per_row = 6
-    gap_x = 112
-    gap_y = 108
+    size = 44
+    gap_x = 132
+    gap_y = 92
     rows = math.ceil(len(icons) / per_row) if icons else 0
-    field = max(250, rows * gap_y + 36)
     width = 920
     top = 96
-    height = top + field + 108
+    # Quiet sky above and below the marks, so the two rules still frame them.
+    content_h = (rows - 1) * gap_y + size if rows else 0
+    quiet = 58
+    field = quiet + content_h + quiet if rows else 250
+    height = top + field + 96
+    bottom_rule = height - 96
+    band_mid = (top + bottom_rule) / 2
+    first_y = band_mid - content_h / 2 + size / 2 if rows else band_mid
     placed = []
     for index, path in enumerate(icons):
         row = index // per_row
@@ -684,8 +701,10 @@ def build_stack(script: Font) -> str:
         count_in_row = min(per_row, len(icons) - row * per_row)
         row_width = (count_in_row - 1) * gap_x
         start_x = width / 2 - row_width / 2
-        placed.append(place_icon(path, index, start_x + col * gap_x, top + 78 + row * gap_y, 74))
-    bottom_rule = height - 96
+        x = start_x + col * gap_x
+        y = first_y + row * gap_y
+        placed.append(place_icon(path, index, x, y, size))
+        placed.append(serif.draw(stack_label(path), x, y + size / 2 + 15, 13, "#d9cbe0", "middle")[0])
     word = "stack"
     word_size = 34
     word_width = script.measure(word, word_size, tracking=-0.4)
@@ -1162,7 +1181,7 @@ def build_all(advance_counter: bool = False) -> None:
     save(stats_path, json.dumps(stats, indent=2) + "\n")
     save(ROOT / "assets" / "profile" / "header.svg", build_header(profile, script, italic, serif))
     save(ROOT / "assets" / "profile" / "tagline.svg", build_tagline(profile, script, italic))
-    save(ROOT / "assets" / "profile" / "stack-field.svg", build_stack(script))
+    save(ROOT / "assets" / "profile" / "stack-field.svg", build_stack(script, serif))
     save(ROOT / "assets" / "profile" / "projects-label.svg", build_projects_label(script))
     for project in projects:
         save(ROOT / "assets" / "profile" / "cards" / f"{project['id']}.svg", build_card(project, serif, italic))
