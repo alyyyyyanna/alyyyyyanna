@@ -534,7 +534,7 @@ def panel(width: float, height: float, body: str, title: str, desc: str, fade_le
 '''
 
 
-def sky(width: float, height: float, glow_x: float, blob_x: float, blob_y: float, blob_fill: str) -> str:
+def sky(width: float, height: float, glow_x: float) -> str:
     return f'''
     <rect width="{width}" height="{height}" fill="#090712"/>
     <radialGradient id="glow" gradientUnits="userSpaceOnUse" cx="{glow_x}" cy="{height * 0.28:.1f}" r="{max(width, height) * 0.95:.1f}">
@@ -543,7 +543,6 @@ def sky(width: float, height: float, glow_x: float, blob_x: float, blob_y: float
       <stop offset="100%" stop-color="#090712"/>
     </radialGradient>
     <rect width="{width}" height="{height}" fill="url(#glow)"/>
-    <ellipse cx="{blob_x}" cy="{blob_y}" rx="168" ry="72" fill="{blob_fill}" opacity="0.16"/>
     '''
 
 
@@ -569,10 +568,10 @@ def build_portrait_panel() -> str:
           preserveAspectRatio="xMidYMid slice" clip-path="url(#portraitClip)"/>
         '''
     body = f'''
-    {sky(width, height, 460, 150, 108, PURPLE)}
+    {sky(width, height, 460)}
     {star_field(width, height, 16, 21, margin=18)}
     {drifting_stars(width, height, 5, 30)}
-    <ellipse cx="{cx}" cy="{cy}" rx="{rx + 26}" ry="{ry + 28}" fill="{PURPLE}" opacity="0.14"/>
+    <ellipse cx="{cx}" cy="{cy}" rx="{rx + 36}" ry="{ry + 40}" fill="{PURPLE}" opacity="0.12"/>
     {photo}
     {portrait_frame(cx, cy, rx, ry)}
     '''
@@ -609,7 +608,7 @@ def build_words_panel(profile: dict, script: Font, italic: Font) -> str:
             f"</g></g>"
         )
     body = f'''
-    {sky(width, height, 120, 400, 300, PINK)}
+    {sky(width, height, 120)}
     {star_field(width, height, 14, 8, margin=20)}
     {drifting_stars(width, height, 5, 14)}
     {''.join(twinkles)}

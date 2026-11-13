@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="920" height="234" viewBox="0 0 920 234" role="img" aria-labelledby="assetTitle assetDesc">
-<title id="assetTitle">Jeepney Router</title>
+<title id="assetTitle">Olympus Mons</title>
 <desc id="assetDesc">[A short description, in your words.]</desc>
 <defs>
         <linearGradient id="fadeX" x1="0" y1="0" x2="1" y2="0">
@@ -32,7 +32,7 @@
         <animate attributeName="opacity" values="0.1;0.32;0.1" dur="4.8s" repeatCount="indefinite"/>
       </circle>
       <svg x="28" y="22" width="150" height="150" viewBox="0 0 360 300" overflow="visible">
-  <title id="jeepneyrouterprouteTitle">Jeepney Router</title>
+  <title id="jeepneyrouterprouteTitle">Olympus Mons</title>
   <desc id="jeepneyrouterprouteDesc">A small world in a painted galaxy, circled by a route of warm little lights.</desc>
   <defs>
     <filter id="jeepneyrouterpedgeBlur" x="0" y="0" width="360" height="300" filterUnits="userSpaceOnUse"><feGaussianBlur stdDeviation="10"/></filter>

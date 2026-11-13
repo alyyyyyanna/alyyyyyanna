@@ -1,7 +1,13 @@
 <!--
 The pictures are built from the files in content/.
 
-name, scroll text, welcome line, and the four [link] labels under the portrait: content/profile.json
+name and the lines under the name: content/profile.json
+  name and bio. They are drawn into assets/profile/header-words.svg only.
+account links under the portrait: content/profile.json, the links list
+  label is the words beside the icon. url is where a click goes.
+  Type the account there. The icon files in assets/profile/icons stay as they are.
+  Facebook, GitHub, and LinkedIn are separate pictures, so a click opens url
+  instead of opening the picture file.
 one project per object, in order: content/projects.json
   image is a planet file already in assets/, or a new one
   imageSide is "left" or "right"
@@ -20,9 +26,19 @@ Pushing a change in content/ redraws the pictures on GitHub.
 The picture address changes with the words, so the page does not keep the old drawing.
 -->
 
-<p align="center">
-  <img src="assets/profile/header.svg" alt="Alyanna Marie Minoza" width="100%">
-</p>
+<table cellspacing="0" cellpadding="0">
+<tr>
+<td width="37%" align="center" valign="top">
+<img src="assets/profile/header-portrait.svg" alt="" width="100%">
+<a href="https://facebook.com/your-account"><img src="assets/profile/icons/facebook.svg" width="32" height="32" alt="Facebook">&nbsp;<img src="assets/profile/icons/facebook-label.svg" height="32" alt="[link]"></a><br>
+<a href="https://github.com/alyyyyyanna"><img src="assets/profile/icons/github.svg" width="32" height="32" alt="GitHub">&nbsp;<img src="assets/profile/icons/github-label.svg" height="32" alt="[link]"></a><br>
+<a href="https://www.linkedin.com/in/your-account"><img src="assets/profile/icons/linkedin.svg" width="32" height="32" alt="LinkedIn">&nbsp;<img src="assets/profile/icons/linkedin-label.svg" height="32" alt="[link]"></a>
+</td>
+<td width="63%" valign="top">
+<img src="assets/profile/header-words.svg" alt="Alyanna Marie Minoza. &quot;Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.&quot;" width="100%">
+</td>
+</tr>
+</table>
 
 <br>
 
@@ -51,7 +67,7 @@ The picture address changes with the words, so the page does not keep the old dr
 <table>
 <tr>
 <td width="58%" valign="top">
-<img src="assets/profile/activity.svg?v=156f0615" alt="activity" width="100%">
+<img src="assets/profile/activity.svg?v=2dcf1dfa" alt="activity" width="100%">
 </td>
 <td width="42%" valign="top">
 <img src="assets/profile/quote.svg?v=d79d9faf" alt="A quote that changes every day" width="100%">
