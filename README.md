@@ -30,9 +30,9 @@ The picture address changes with the words, so the page does not keep the old dr
 <tr>
 <td width="37%" align="center" valign="top">
 <img src="assets/profile/header-portrait.svg" alt="" width="100%">
-<a href="https://facebook.com/your-account"><img src="assets/profile/icons/facebook.svg" width="32" height="32" alt="Facebook">&nbsp;<img src="assets/profile/icons/facebook-label.svg" height="32" alt="[link]"></a><br>
-<a href="https://github.com/alyyyyyanna"><img src="assets/profile/icons/github.svg" width="32" height="32" alt="GitHub">&nbsp;<img src="assets/profile/icons/github-label.svg" height="32" alt="[link]"></a><br>
-<a href="https://www.linkedin.com/in/your-account"><img src="assets/profile/icons/linkedin.svg" width="32" height="32" alt="LinkedIn">&nbsp;<img src="assets/profile/icons/linkedin-label.svg" height="32" alt="[link]"></a>
+<a href="https://facebook.com/your-account"><img src="assets/profile/icons/facebook.svg" width="32" height="32" alt="Facebook">&nbsp;<img src="assets/profile/icons/facebook-label.svg" height="32" alt="Facebook"></a><br>
+<a href="https://github.com/alyyyyyanna"><img src="assets/profile/icons/github.svg" width="32" height="32" alt="GitHub">&nbsp;<img src="assets/profile/icons/github-label.svg" height="32" alt="Github"></a><br>
+<a href="www.linkedin.com/in/alyanna-miñoza-30818a345"><img src="assets/profile/icons/linkedin.svg" width="32" height="32" alt="LinkedIn">&nbsp;<img src="assets/profile/icons/linkedin-label.svg" height="32" alt="LinkedIn"></a>
 </td>
 <td width="63%" valign="top">
 <img src="assets/profile/header-words.svg" alt="Alyanna Marie Minoza. &quot;Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.&quot;" width="100%">
@@ -55,13 +55,13 @@ The picture address changes with the words, so the page does not keep the old dr
 </p>
 
 <p align="center">
-  <img src="assets/profile/cards/peak-hunter.svg" alt="Peak Hunter" width="100%">
+  <img src="assets/profile/cards/Olympus Mons.svg" alt="Olympus Mons" width="100%">
 </p>
 <p align="center">
-  <img src="assets/profile/cards/lantern-world.svg" alt="The lantern world" width="100%">
+  <img src="assets/profile/cards/grid9ora.svg" alt="grid9ora" width="100%">
 </p>
 <p align="center">
-  <img src="assets/profile/cards/jeepney-router.svg" alt="Jeepney Router" width="100%">
+  <img src="assets/profile/cards/Space Traveler.svg" alt="Space Traveler" width="100%">
 </p>
 
 <table>
