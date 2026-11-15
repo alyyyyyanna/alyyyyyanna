@@ -67,10 +67,10 @@ The picture address changes with the words, so the page does not keep the old dr
 <table>
 <tr>
 <td width="58%" valign="top">
-<img src="assets/profile/activity.svg?v=d09c4b05" alt="activity" width="100%">
+<img src="assets/profile/activity.svg?v=bb06b2cc" alt="activity" width="100%">
 </td>
 <td width="42%" valign="top">
-<img src="assets/profile/quote.svg?v=9b1e8a5f" alt="A quote that changes every day" width="100%">
+<img src="assets/profile/quote.svg?v=bc8f3efa" alt="A quote that changes every day" width="100%">
 </td>
 </tr>
 </table>
